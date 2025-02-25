@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from planban.views import index as index_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', index_views, name='index'),
     path('admin/', admin.site.urls),
