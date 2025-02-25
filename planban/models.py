@@ -12,4 +12,4 @@ class Project(models.Model):
     readme = models.TextField()
     visibility = models.IntegerField(choices=VISIBILITY, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
-    modified_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
