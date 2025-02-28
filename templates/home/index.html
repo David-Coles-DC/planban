@@ -129,6 +129,37 @@
                     </div>
                 </div>
             </section>
+
+            <!-- FAQ Section -->
+            <section class="faqs_outer" id="faqs">
+                <div class="section_inner faqs">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq">
+                        <h3 class="faq-question">What is Planban?</h3>
+                        <div class="faq-answer">
+                            <p>
+                                Planban is a project management tool that helps you organize your tasks visually using
+                                Kanban boards, Gantt charts, and more.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="faq">
+                        <h3 class="faq-question">How do I get started?</h3>
+                        <div class="faq-answer">
+                            <p>To get started, simply sign up for an account and create your first project.</p>
+                        </div>
+                    </div>
+                    <div class="faq">
+                        <h3 class="faq-question">Can I collaborate with my team?</h3>
+                        <div class="faq-answer">
+                            <p>
+                                Yes, you can invite team members to your projects and collaborate using task
+                                assignments, comments, and notifications.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <!-- Login Modal HTML -->
@@ -177,12 +208,11 @@
             });
 
             // Modal JavaScript
-            function setupModal(modalId, buttonId) {
+            function setupModal(modalId, buttonIds) {
                 var modal = document.getElementById(modalId);
-                var btn = document.getElementById(buttonId);
                 var span = modal.getElementsByClassName('close')[0];
 
-                buttonIds.forEach(function(buttonId) {
+                buttonIds.forEach(function (buttonId) {
                     var btn = document.getElementById(buttonId);
                     btn.onclick = function () {
                         modal.classList.add('open');
@@ -203,6 +233,20 @@
             // Setup modals
             setupModal('loginModal', ['loginButton']);
             setupModal('signupModal', ['introSignupButton', 'signupButton']);
+
+            // FAQ Accordion JavaScript
+            document.querySelectorAll('.faq-question').forEach((question) => {
+                question.addEventListener('click', function () {
+                    var answer = this.nextElementSibling;
+                    if (answer.style.height) {
+                        answer.style.height = null;
+                        answer.classList.remove('open');
+                    } else {
+                        answer.style.height = answer.scrollHeight + 'px';
+                        answer.classList.add('open');
+                    }
+                });
+            });
         </script>
     </body>
 </html>
