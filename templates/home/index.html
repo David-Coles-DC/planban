@@ -2,62 +2,24 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta
-            http-equiv="X-UA-Compatible"
-            content="IE=edge"
-        />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-        />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Planban Home</title>
         {% load static %}
-        <script
-            type="text/javascript"
-            src="{% static 'js/skrollr.min.js' %}"
-            defer
-        ></script>
-        <link
-            rel="icon"
-            type="image/png"
-            href="{% static 'images/favicon-96x96.png' %}"
-            sizes="96x96"
-        />
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="{% static 'images/favicon.svg' %}"
-        />
-        <link
-            rel="shortcut icon"
-            href="{% static 'images/favicon.ico' %}"
-        />
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="{% static 'images/apple-touch-icon.png' %}"
-        />
-        <meta
-            name="apple-mobile-web-app-title"
-            content="Planban"
-        />
-        <link
-            rel="manifest"
-            href="{% static 'images/site.webmanifest' %}"
-        />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="{% static 'css/styles.css' %}"
-        />
+        <script type="text/javascript" src="{% static 'js/skrollr.min.js' %}" defer></script>
+        <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}" />
+        <meta name="apple-mobile-web-app-title" content="Planban" />
+        <link rel="manifest" href="{% static 'images/site.webmanifest' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+        <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
         <div class="intro">
-            <div
-                class="logo_outer"
-                data-anchor-target=".intro"
-            >
+            <div class="logo_outer" data-anchor-target=".intro">
                 <div
                     class="logo"
                     data-anchor-target=".intro"
@@ -72,8 +34,7 @@
                     data-300-start="top: 100vh; opacity: 0;"
                     data-600-start="top: 55vh; opacity: 1;"
                 >
-                    Organize your projects as a Kanban board, list, or Gantt
-                    chart.
+                    Organize your projects as a Kanban board, list, or Gantt chart.
                 </div>
             </div>
             <div class="intro_buttons">
@@ -97,14 +58,7 @@
                 </a>
             </div>
         </div>
-        <div
-            style="
-                height: 2000px;
-                background-color: #ffffff;
-                z-index: 2;
-                position: relative;
-            "
-        ></div>
+        <div style="height: 2000px; background-color: #ffffff; z-index: 2; position: relative"></div>
     </body>
     <script>
         window.onload = function () {

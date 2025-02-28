@@ -33,7 +33,7 @@ body {
 .logo {
     background: url(/static/images/logo.webp) no-repeat left center / cover;
     height: 99px;
-    max-height: 14.1vw;
+    max-height: 14.8vw;
     width: 100%;
 }
 
@@ -41,6 +41,7 @@ body {
     font-size: 1.5em;
     left: 50%;
     letter-spacing: 0.2em;
+    line-height: 1.3em;
     position: absolute;
     text-align: center;
     top: calc(55vh);
@@ -52,7 +53,7 @@ body {
     font-size: 1.2em;
     letter-spacing: 0.01em;
     position: fixed;
-    top: calc(68vh);
+    top: calc(66vh);
     width: 100%;
 }
 
