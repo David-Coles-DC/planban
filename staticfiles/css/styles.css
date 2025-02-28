@@ -8,6 +8,10 @@ main {
     font-family: "Poppins", serif;
 }
 
+section {
+    overflow-x: hidden;
+}
+
 .intro {
     background: #024CAA;
     background: linear-gradient(180deg, rgba(30, 28, 83, 1) 0%, rgba(2, 76, 170, 1) 100%);
@@ -159,12 +163,14 @@ main {
 
 header {
     align-items: center;
+    background-color: #ffffff;
     display: flex;
     height: 35px;
     justify-content: space-between;
     padding: 20px;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 nav ul {

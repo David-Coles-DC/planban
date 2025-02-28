@@ -39,7 +39,8 @@
             </div>
             <div class="intro_buttons">
                 <a
-                    href="/"
+                    href="javascript:void(0)"
+                    id="introSignupButton"
                     data-anchor-target=".intro"
                     data-start="left: calc(0% - 80px); opacity: 0;"
                     data-600-start="left: calc(0% - 80px); opacity: 0;"
@@ -48,7 +49,7 @@
                     Get Started
                 </a>
                 <a
-                    href="/"
+                    href="#contact"
                     data-anchor-target=".intro"
                     data-start="right: calc(0% - 80px); opacity: 0;"
                     data-600-start="right: calc(0% - 80px); opacity: 0;"
@@ -73,10 +74,13 @@
                             <a href="#home">Home</a>
                         </li>
                         <li>
-                            <a href="/">Features</a>
+                            <a href="#features">Features</a>
                         </li>
                         <li>
-                            <a href="/">Contact Us</a>
+                            <a href="#faqs">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact Us</a>
                         </li>
                     </ul>
                 </nav>
@@ -86,12 +90,12 @@
                             <a href="javascript:void(0)" id="loginButton">Login</a>
                         </li>
                         <li>
-                            <a href="/" class="button">Get Started</a>
+                            <a href="javascript:void(0)" class="button" id="signupButton">Get Started</a>
                         </li>
                     </ul>
                 </nav>
             </header>
-            <section class="features_outer">
+            <section class="features_outer" id="features">
                 <div class="section_inner features">
                     <div
                         class="feature"
@@ -127,11 +131,26 @@
             </section>
         </main>
 
-        <!-- Modal HTML -->
+        <!-- Login Modal HTML -->
         <div id="loginModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Login</h2>
+                <form>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Signup Modal HTML -->
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Signup</h2>
                 <form>
                     <label for="username">Username:</label>
                     <input type="text" id="username" name="username" required />
@@ -158,23 +177,32 @@
             });
 
             // Modal JavaScript
-            var modal = document.getElementById('loginModal');
-            var btn = document.getElementById('loginButton');
-            var span = document.getElementsByClassName('close')[0];
+            function setupModal(modalId, buttonId) {
+                var modal = document.getElementById(modalId);
+                var btn = document.getElementById(buttonId);
+                var span = modal.getElementsByClassName('close')[0];
 
-            btn.onclick = function () {
-                modal.classList.add('open');
-            };
+                buttonIds.forEach(function(buttonId) {
+                    var btn = document.getElementById(buttonId);
+                    btn.onclick = function () {
+                        modal.classList.add('open');
+                    };
+                });
 
-            span.onclick = function () {
-                modal.classList.remove('open');
-            };
-
-            window.onclick = function (event) {
-                if (event.target == modal) {
+                span.onclick = function () {
                     modal.classList.remove('open');
-                }
-            };
+                };
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.classList.remove('open');
+                    }
+                };
+            }
+
+            // Setup modals
+            setupModal('loginModal', ['loginButton']);
+            setupModal('signupModal', ['introSignupButton', 'signupButton']);
         </script>
     </body>
 </html>
