@@ -67,5 +67,7 @@ Planban follows **WCAG 2.1 AA guidelines**, including:
 
 ## 📚 Resources
 
-- [RealFaviconGenerator](https://realfavicongenerator.net/) - To create the favicon for the website
 - [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3) - For the colour palette Resources
+- [Google Fonts](https://fonts.google.com/) - I used the fonts 'Poppins'
+- [RealFaviconGenerator](https://realfavicongenerator.net/) - To create the favicon for the website
+- [Skrollr](https://github.com/Prinzhorn/skrollr) - Stand-alone parallax scrolling JavaScript library
