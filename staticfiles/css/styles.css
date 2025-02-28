@@ -20,7 +20,7 @@ body {
 .logo_outer {
     align-items: center;
     display: flex;
-    height: 100vh;
+    height: 80vh;
     justify-content: center;
     left: 50%;
     max-width: 90%;
@@ -44,16 +44,16 @@ body {
     line-height: 1.3em;
     position: absolute;
     text-align: center;
-    top: calc(55vh);
+    top: 46vh;
     transform: translateX(-50%);
-    width: 100%;
+    width: 375px;
 }
 
 .intro_buttons {
     font-size: 1.2em;
     letter-spacing: 0.01em;
     position: fixed;
-    top: calc(66vh);
+    top: 55vh;
     width: 100%;
 }
 
