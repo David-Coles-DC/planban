@@ -17,17 +17,29 @@
 - **Database**: PostgreSQL
 - **Authentication**: Django Authentication System
 
+## 📅 Planning
+
+Before creating the projects I set up user stories via GitHub Projects, the board itself can be found here;
+
+[https://github.com/users/David-Coles-DC/projects/8](https://github.com/users/David-Coles-DC/projects/8)
+
+## 🚀 Deployment
+
+![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
+
+The site is currently deployed on Heroku and can be accessed via the following URL [https://planban-c33c6bd858d7.herokuapp.com/](https://planban-c33c6bd858d7.herokuapp.com/)
+
 ## 📦 Installation
 ### **1️⃣ Clone the Repository**
 ```sh
-git clone https://github.com/yourusername/planban.git
+git clone https://github.com/David-Coles-DC/planban
 cd planban
 ```
 
 ### **2️⃣ Set Up a Virtual Environment**
 ```sh
 python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/Scripts/activate  # On Mac use: venv\bin\activate
 ```
 
 ### **3️⃣ Install Dependencies**
@@ -53,13 +65,7 @@ Planban follows **WCAG 2.1 AA guidelines**, including:
 - High **colour contrast** and resizable text.
 - Mobile-friendly and touch-accessible UI.
 
-## 📝 License
-This project is licensed under the **MIT License**.
+## 📚 Resources
 
----
-**Planban** – Your all-in-one project management solution. 🚀
-
-### Resources
-
-- [RealFaviconGenerator](https://realfavicongenerator.net/) - To Create the favicon for the website
-- [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3) - For the colour pallette
+- [RealFaviconGenerator](https://realfavicongenerator.net/) - To create the favicon for the website
+- [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3) - For the colour palette Resources
