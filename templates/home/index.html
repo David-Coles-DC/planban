@@ -1,44 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="IE=edge"
+        />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+        <title>Planban Home</title>
+        {% load static %}
+        <script
+            type="text/javascript"
+            src="{% static 'js/skrollr.min.js' %}"
+            defer
+        ></script>
+        <link
+            rel="icon"
+            type="image/png"
+            href="{% static 'images/favicon-96x96.png' %}"
+            sizes="96x96"
+        />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="{% static 'images/favicon.svg' %}"
+        />
+        <link
+            rel="shortcut icon"
+            href="{% static 'images/favicon.ico' %}"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{% static 'images/apple-touch-icon.png' %}"
+        />
+        <meta
+            name="apple-mobile-web-app-title"
+            content="Planban"
+        />
+        <link
+            rel="manifest"
+            href="{% static 'images/site.webmanifest' %}"
+        />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'css/styles.css' %}"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planban Home</title>
-    {% load static %}
-    <script type="text/javascript" src="{% static 'js/skrollr.min.js' %}" defer></script>
-    <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
-    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}" />
-    <meta name="apple-mobile-web-app-title" content="Planban" />
-    <link rel="manifest" href="{% static 'images/site.webmanifest' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-
-<body>
-    <div class="logo_outer">
-        <div class="logo_inner" data-anchor-target=".logo_outer">
-            <div class="logo" data-anchor-target=".logo_outer" data-start="width: 13%;" data-300-start="width: 100%;"
-                aria-label="Planban"></div>
+    <body>
+        <div class="intro">
             <div
-                class="strap"
-                data-anchor-target=".logo_outer"
-                data-start="top: 100vh; opacity: 0;"
-                data-300-start="top: 100vh; opacity: 0;"
-                data-600-start="top: 55vh; opacity: 1;"
+                class="logo_outer"
+                data-anchor-target=".intro"
             >
-                Organize your projects as a Kanban board, list, timeline, calendar, or Gantt chart.
+                <div
+                    class="logo"
+                    data-anchor-target=".intro"
+                    data-start="width: 13%;"
+                    data-300-start="width: 100%;"
+                    aria-label="Planban"
+                ></div>
+                <div
+                    class="strap"
+                    data-anchor-target=".intro"
+                    data-start="top: 100vh; opacity: 0;"
+                    data-300-start="top: 100vh; opacity: 0;"
+                    data-600-start="top: 55vh; opacity: 1;"
+                >
+                    Organize your projects as a Kanban board, list, or Gantt
+                    chart.
+                </div>
+            </div>
+            <div class="intro_buttons">
+                <a
+                    href="/"
+                    data-anchor-target=".intro"
+                    data-start="left: calc(0% - 80px); opacity: 0;"
+                    data-600-start="left: calc(0% - 80px); opacity: 0;"
+                    data-900-start="left: calc(50% - 80px); opacity: 1;"
+                >
+                    Get Started
+                </a>
+                <a
+                    href="/"
+                    data-anchor-target=".intro"
+                    data-start="right: calc(0% - 80px); opacity: 0;"
+                    data-600-start="right: calc(0% - 80px); opacity: 0;"
+                    data-900-start="right: calc(50% - 80px); opacity: 1;"
+                >
+                    Contact Us
+                </a>
             </div>
         </div>
-    </div>
-    <div style="height: 2000px; background-color: #ffffff; z-index: 2; position: relative;"></div>
-</body>
-<script>
-    window.onload = function () {
-        skrollr.init()
-    }
-</script>
-
+        <div
+            style="
+                height: 2000px;
+                background-color: #ffffff;
+                z-index: 2;
+                position: relative;
+            "
+        ></div>
+    </body>
+    <script>
+        window.onload = function () {
+            skrollr.init();
+        };
+    </script>
 </html>

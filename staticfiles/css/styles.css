@@ -6,17 +6,18 @@ body {
     font-family: "Poppins", serif;
 }
 
-.logo_outer {
+.intro {
     background: #024CAA;
+    background: linear-gradient(180deg, rgba(30,28,83,1) 0%, rgba(2,76,170,1) 100%);
     color: #ffffff;
-    height: calc(100vh + 600px);
+    height: calc(100vh + 900px);
     overflow: hidden;
     position: relative;
     width: 100%;
     z-index: 1;
 }
 
-.logo_inner {
+.logo_outer {
     align-items: center;
     display: flex;
     height: 100vh;
@@ -30,17 +31,49 @@ body {
 }
 
 .logo {
-    aspect-ratio: 6.06 / 1;
     background: url(/static/images/logo.webp) no-repeat left center / cover;
     height: 99px;
+    max-height: 14.1vw;
+    width: 100%;
 }
 
 .strap {
     font-size: 1.5em;
     left: 50%;
+    letter-spacing: 0.2em;
     position: absolute;
     text-align: center;
     top: calc(55vh);
     transform: translateX(-50%);
-    width: 510px;
+    width: 100%;
+}
+
+.intro_buttons {
+    font-size: 1.2em;
+    letter-spacing: 0.01em;
+    position: fixed;
+    top: calc(62vh);
+    width: 100%;
+}
+
+.intro_buttons a {
+    border-radius: 5px;
+    background: #000000;
+    color: #ffffff;
+    display: inline-block;
+    padding: 10px 20px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    width: 110px;
+}
+
+.intro_buttons a:nth-of-type(1) {
+    left: calc(50% - 80px);
+    transform: translateX(-50%);
+}
+
+.intro_buttons a:nth-of-type(2) {
+    right: calc(50% - 80px);
+    transform: translateX(50%);
 }
