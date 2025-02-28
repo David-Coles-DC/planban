@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
-body, header, main {
+body,
+header,
+main {
     margin: 0;
     padding: 0;
     font-family: "Poppins", serif;
@@ -8,7 +10,7 @@ body, header, main {
 
 .intro {
     background: #024CAA;
-    background: linear-gradient(180deg, rgba(30,28,83,1) 0%, rgba(2,76,170,1) 100%);
+    background: linear-gradient(180deg, rgba(30, 28, 83, 1) 0%, rgba(2, 76, 170, 1) 100%);
     color: #ffffff;
     font-weight: 200;
     height: calc(100vh + 900px);
@@ -58,7 +60,8 @@ body, header, main {
     width: 100%;
 }
 
-.intro_buttons a, .button {
+.intro_buttons a,
+.button {
     border-radius: 5px;
     background: #000000;
     color: #ffffff;
@@ -135,10 +138,12 @@ body, header, main {
         height: 6px;
         top: 8px;
     }
+
     50% {
         height: 12px;
         top: 8px;
     }
+
     100% {
         height: 12px;
         top: 12px;
@@ -220,8 +225,47 @@ nav ul li a {
     font-weight: bold;
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.section_inner {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.features_outer {
+    background-color: #DBD3D3;
+    padding: 4rem 0 2rem 0;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.feature {
+    flex: 1;
+    padding: 1rem;
+    max-width: 300px;
+}
+
+.feature i {
+    font-size: 5rem;
+    color: #024CAA;
+    margin-bottom: 1rem;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature p {
+    color: #555;
 }
