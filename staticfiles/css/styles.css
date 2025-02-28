@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
-body {
+body, header, main {
     margin: 0;
     padding: 0;
     font-family: "Poppins", serif;
@@ -10,6 +10,7 @@ body {
     background: #024CAA;
     background: linear-gradient(180deg, rgba(30,28,83,1) 0%, rgba(2,76,170,1) 100%);
     color: #ffffff;
+    font-weight: 200;
     height: calc(100vh + 900px);
     overflow: hidden;
     position: relative;
@@ -57,15 +58,19 @@ body {
     width: 100%;
 }
 
-.intro_buttons a {
+.intro_buttons a, .button {
     border-radius: 5px;
     background: #000000;
     color: #ffffff;
     display: inline-block;
+    font-weight: 200;
     padding: 10px 20px;
-    position: absolute;
     text-align: center;
     text-decoration: none;
+}
+
+.intro_buttons a {
+    position: absolute;
     width: 110px;
 }
 
@@ -77,4 +82,146 @@ body {
 .intro_buttons a:nth-of-type(2) {
     right: calc(50% - 80px);
     transform: translateX(50%);
+}
+
+.scroll_down {
+    bottom: 25px;
+    left: 50%;
+    position: fixed;
+    transform: translateX(-50%);
+}
+
+.scroll_down .mouse {
+    border: 2px solid #ffffff55;
+    border-radius: 50px;
+    height: 50px;
+    position: relative;
+    width: 30px;
+}
+
+.scroll_down .mouse:after {
+    background-color: #ffffff;
+    content: '';
+    display: block;
+    height: 1px;
+    opacity: 0.3;
+    position: absolute;
+    top: 15px;
+    width: 100%;
+}
+
+.scroll_down .mouse .scroll {
+    animation: scrolldown 1s infinite;
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 13px;
+    left: 50%;
+    position: absolute;
+    top: 10px;
+    transform: translateX(-50%);
+    width: 5px;
+}
+
+.scroll_down .text {
+    position: absolute;
+    width: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 25px;
+}
+
+@keyframes scrolldown {
+    0% {
+        height: 6px;
+        top: 8px;
+    }
+    50% {
+        height: 12px;
+        top: 8px;
+    }
+    100% {
+        height: 12px;
+        top: 12px;
+    }
+}
+
+main {
+    background-color: #ffffff;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+}
+
+header {
+    align-items: center;
+    display: flex;
+    height: 35px;
+    justify-content: space-between;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+}
+
+nav ul {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+}
+
+/* Modal styles */
+.modal {
+    backdrop-filter: blur(2px);
+    background-color: #00000055;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    overflow: auto;
+    padding-top: 60px;
+    position: fixed;
+    top: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+    width: 100%;
+    z-index: 10;
+}
+
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+    transform: translateY(-50px);
+}
+
+.modal.open .modal-content {
+    transform: translateY(0);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <div class="intro">
+        <section class="intro" id="home">
             <div class="logo_outer" data-anchor-target=".intro">
                 <div
                     class="logo"
@@ -57,12 +57,90 @@
                     Contact Us
                 </a>
             </div>
+            <div class="scroll_down">
+                <div class="mouse">
+                    <div class="scroll"></div>
+                </div>
+                <div class="text">SCROLL DOWN</div>
+            </div>
+        </section>
+        <main style="height: 3000px">
+            <header>
+                <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#home">Home</a>
+                        </li>
+                        <li>
+                            <a href="/">Features</a>
+                        </li>
+                        <li>
+                            <a href="/">Contact Us</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0)" id="loginButton">Login</a>
+                        </li>
+                        <li>
+                            <a href="/" class="button">Get Started</a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        </main>
+
+        <!-- Modal HTML -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Login</h2>
+                <form>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required />
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required />
+                    <button type="submit">Login</button>
+                </form>
+            </div>
         </div>
-        <div style="height: 2000px; background-color: #ffffff; z-index: 2; position: relative"></div>
+
+        <script>
+            window.onload = function () {
+                skrollr.init();
+            };
+
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth',
+                    });
+                });
+            });
+
+            // Modal JavaScript
+            var modal = document.getElementById('loginModal');
+            var btn = document.getElementById('loginButton');
+            var span = document.getElementsByClassName('close')[0];
+
+            btn.onclick = function () {
+                modal.classList.add('open');
+            };
+
+            span.onclick = function () {
+                modal.classList.remove('open');
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.classList.remove('open');
+                }
+            };
+        </script>
     </body>
-    <script>
-        window.onload = function () {
-            skrollr.init();
-        };
-    </script>
 </html>
