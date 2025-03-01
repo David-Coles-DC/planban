@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
+:root {
+    --color-primary: #091057;
+    --color-secondary: #024caa;
+    --color-tertiary: #ec8305;
+    --color-gray: #d3d3d3;
+}
+
 body,
 header,
 main {
@@ -12,8 +19,14 @@ section {
     overflow-x: hidden;
 }
 
+.section_inner {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
 .intro {
-    background: #024CAA;
+    background: var(--color-secondary);
     background: linear-gradient(180deg, rgba(30, 28, 83, 1) 0%, rgba(2, 76, 170, 1) 100%);
     color: #ffffff;
     font-weight: 200;
@@ -22,6 +35,10 @@ section {
     position: relative;
     width: 100%;
     z-index: 1;
+}
+
+body.ismobile .intro {
+    height: 100vh;
 }
 
 .logo_outer {
@@ -173,18 +190,203 @@ header {
     z-index: 1;
 }
 
+
+/* Nav styles */
+nav.desktop {
+    display: none;
+}
+
+nav.mobile {
+    display: block;
+}
+
 nav ul {
     align-items: center;
     display: flex;
-    gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
+nav ul li {
+    position: relative;
+    padding: 5px 10px;
+}
+
+nav ul li:not(:has(.button)):before, nav ul li:not(:has(.button)):after {
+    background-color: var(--color-tertiary);
+    content: '';
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    transition: height 0.5s ease, opacity 1s ease;
+    width: 100%;
+    z-index: 0;
+}
+
+nav ul li:hover:not(:has(.button)):before, nav ul li:hover:not(:has(.button)):after {
+    height: 50%;
+    opacity: 1;
+}
+
+nav ul li:not(:has(.button)):before {
+    top: 0;
+    left: 0;
+    border-radius: 5px 5px 0 0;
+}
+
+nav ul li:not(:has(.button)):after {
+    bottom: 0;
+    right: 0;
+    border-radius: 0 0 5px 5px;
+}
+
 nav ul li a {
     color: #000000;
+    display: inline-block;
+    position: relative;
     text-decoration: none;
+    z-index: 1;
+}
+
+nav.mobile > ul > li > a > i {
+    font-size: 1.5em;
+    margin: 3px 0 0 0;
+}
+
+@media all and (min-width: 825px) {
+    nav.desktop {
+        display: block;
+    }
+
+    nav.mobile {
+        display: none;
+    }
+}
+
+
+/* Features styles */
+.features_outer {
+    background-color: #DBD3D3;
+    padding: 4rem 0 2rem 0;
+}
+
+.features {
+    justify-content: space-around;
+    text-align: center;
+}
+
+.feature {
+    flex: 1;
+    padding: 1rem;
+    width: 100%;
+}
+
+.feature i {
+    font-size: 5rem;
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature p {
+    color: #555;
+}
+
+@media all and (min-width: 730px) {
+    .features {
+        display: flex;
+    }
+
+    .feature {
+        max-width: 300px;
+    }
+}
+
+/* FAQ styles */
+.faqs_outer {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.faq-question {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid var(--color-gray);
+    margin-bottom: 5px;
+}
+
+.faq-answer {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    border: 1px solid var(--color-gray);
+    border-top: none;
+    transition: height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.faq-answer.open {
+    height: auto;
+    opacity: 1;
+    padding: 10px;
+}
+
+/* Contact styles */
+.contact {
+    text-align: center;
+}
+
+.contact_outer {
+    padding: 50px 20px;
+    background-color: var(--color-gray);
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-secondary);
+    color: #fff;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #023a8a;
 }
 
 /* Modal styles */
@@ -236,72 +438,4 @@ nav ul li a {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-.section_inner {
-    margin: 0 auto;
-    max-width: 1200px;
-    padding: 2rem;
-}
-
-.features_outer {
-    background-color: #DBD3D3;
-    padding: 4rem 0 2rem 0;
-}
-
-.features {
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-}
-
-.feature {
-    flex: 1;
-    padding: 1rem;
-    max-width: 300px;
-}
-
-.feature i {
-    font-size: 5rem;
-    color: #024CAA;
-    margin-bottom: 1rem;
-}
-
-.feature h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.feature p {
-    color: #555;
-}
-
-/* FAQ styles */
-.faqs_outer {
-    padding: 50px 20px;
-    background-color: #f9f9f9;
-}
-
-.faq-question {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #eee;
-    border: 1px solid #ddd;
-    margin-bottom: 5px;
-}
-
-.faq-answer {
-    height: 0;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0 10px;
-    border: 1px solid #ddd;
-    border-top: none;
-    transition: height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-}
-
-.faq-answer.open {
-    height: auto;
-    opacity: 1;
-    padding: 10px;
 }

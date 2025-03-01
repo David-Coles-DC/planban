@@ -68,7 +68,7 @@
         <main style="height: 3000px">
             <header>
                 <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
-                <nav>
+                <nav class="desktop">
                     <ul>
                         <li>
                             <a href="#home">Home</a>
@@ -84,13 +84,22 @@
                         </li>
                     </ul>
                 </nav>
-                <nav>
+                <nav class="desktop">
                     <ul>
                         <li>
                             <a href="javascript:void(0)" id="loginButton">Login</a>
                         </li>
                         <li>
                             <a href="javascript:void(0)" class="button" id="signupButton">Get Started</a>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="mobile">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0)" aria-label="Open menu">
+                                <i class="fa-solid fa-bars"></i>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -129,7 +138,6 @@
                     </div>
                 </div>
             </section>
-
             <!-- FAQ Section -->
             <section class="faqs_outer" id="faqs">
                 <div class="section_inner faqs">
@@ -158,6 +166,29 @@
                             </p>
                         </div>
                     </div>
+                </div>
+            </section>
+            <!-- Contact Section -->
+            <section class="contact_outer" id="contact">
+                <div class="section_inner contact">
+                    <h2>Contact Us</h2>
+                    <p>If you have any questions or need further information, please feel free to contact us.</p>
+                    <!--
+                        <div class="contact-info">
+                            <p><strong>Email:</strong> support@planban.com</p>
+                            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                            <p><strong>Address:</strong> 123 Planban Street, Project City, PC 12345</p>
+                        </div>
+                    -->
+                    <form class="contact-form">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required />
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required />
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
                 </div>
             </section>
         </main>
@@ -196,6 +227,7 @@
             window.onload = function () {
                 var s = skrollr.init();
                 if (s.isMobile()) {
+                    document.body.classList.add('is_mobile');
                     s.destroy();
                 }
             };
