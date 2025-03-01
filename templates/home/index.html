@@ -65,45 +65,45 @@
                 <div class="text">SCROLL DOWN</div>
             </div>
         </section>
-        <main style="height: 3000px">
-            <header>
-                <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
-                <nav class="desktop">
-                    <ul>
-                        <li>
-                            <a href="#home">Home</a>
-                        </li>
-                        <li>
-                            <a href="#features">Features</a>
-                        </li>
-                        <li>
-                            <a href="#faqs">FAQs</a>
-                        </li>
-                        <li>
-                            <a href="#contact">Contact Us</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="desktop">
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0)" id="loginButton">Login</a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="button" id="signupButton">Get Started</a>
-                        </li>
-                    </ul>
-                </nav>
-                <nav class="mobile">
-                    <ul>
-                        <li>
-                            <a href="javascript:void(0)" aria-label="Open menu">
-                                <i class="fa-solid fa-bars"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+        <header>
+            <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
+            <nav class="desktop">
+                <ul>
+                    <li>
+                        <a href="#home">Home</a>
+                    </li>
+                    <li>
+                        <a href="#features">Features</a>
+                    </li>
+                    <li>
+                        <a href="#faqs">FAQs</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact Us</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="desktop">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)" id="loginButton">Login</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="button" id="signupButton">Get Started</a>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="mobile">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)" aria-label="Open menu">
+                            <i class="fa-solid fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
             <section class="features_outer" id="features">
                 <div class="section_inner features">
                     <div
@@ -142,7 +142,11 @@
             <section class="faqs_outer" id="faqs">
                 <div class="section_inner faqs">
                     <h2>Frequently Asked Questions</h2>
-                    <div class="faq">
+                    <div
+                        class="faq"
+                        data-0-bottom="margin-top: 250px; opacity: 0"
+                        data--250-bottom="margin-top: 0px; opacity: 1"
+                    >
                         <h3 class="faq-question">What is Planban?</h3>
                         <div class="faq-answer">
                             <p>
@@ -151,13 +155,21 @@
                             </p>
                         </div>
                     </div>
-                    <div class="faq">
+                    <div
+                        class="faq"
+                        data-0-bottom="margin-top: 250px; opacity: 0"
+                        data--250-bottom="margin-top: 0px; opacity: 1"
+                    >
                         <h3 class="faq-question">How do I get started?</h3>
                         <div class="faq-answer">
                             <p>To get started, simply sign up for an account and create your first project.</p>
                         </div>
                     </div>
-                    <div class="faq">
+                    <div
+                        class="faq"
+                        data-0-bottom="margin-top: 250px; opacity: 0"
+                        data--250-bottom="margin-top: 0px; opacity: 1"
+                    >
                         <h3 class="faq-question">Can I collaborate with my team?</h3>
                         <div class="faq-answer">
                             <p>
@@ -192,6 +204,27 @@
                 </div>
             </section>
         </main>
+        <footer>
+            <div class="footer_inner">
+                <div class="footer_column">
+                    <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
+                </div>
+                <div class="footer_column">&copy; {% now "Y" %} Planban. All rights reserved.</div>
+                <div class="footer_column">
+                    <div class="social_media">
+                        <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://x.com/" aria-label="X" target="_blank">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/" aria-label="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <!-- Login Modal HTML -->
         <div id="loginModal" class="modal">
