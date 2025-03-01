@@ -308,11 +308,18 @@
                     var answer = this.nextElementSibling;
                     if (answer.style.height) {
                         answer.style.height = null;
-                        answer.classList.remove('open');
+                        answer.classList.add('closed');
                     } else {
                         answer.style.height = answer.scrollHeight + 'px';
-                        answer.classList.add('open');
+                        answer.classList.remove('closed');
                     }
+                });
+            });
+
+            // Hide FAQ answers by default with JavaScript
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.faq-answer').forEach((answer) => {
+                    answer.classList.add('closed');
                 });
             });
         </script>

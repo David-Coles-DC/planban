@@ -191,7 +191,7 @@ header {
     padding: 20px;
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 3;
 }
 
 
@@ -335,7 +335,7 @@ nav.mobile > ul > li > a > i {
     transition: height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
-.faq-answer.open {
+.faq-answer:not(.closed) {
     height: auto;
     opacity: 1;
     padding: 10px;
