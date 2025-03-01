@@ -17,7 +17,7 @@
         <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous"></script>
     </head>
 
-    <body id="skrollr-body">
+    <body>
         <section class="intro" id="home">
             <div class="logo_outer" data-anchor-target=".intro">
                 <div
@@ -194,7 +194,10 @@
 
         <script>
             window.onload = function () {
-                skrollr.init();
+                var s = skrollr.init();
+                if (s.isMobile()) {
+                    s.destroy();
+                }
             };
 
             document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
