@@ -448,7 +448,7 @@ nav.mobile > ul > li > a > i {
 footer {
     background-color: var(--color-primary);
     color: #ffffff;
-    padding: 20px 0;
+    padding: 23px 0;
     position: relative;
     z-index: 1;
 }

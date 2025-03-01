@@ -162,7 +162,7 @@
                     >
                         <h3 class="faq-question">How do I get started?</h3>
                         <div class="faq-answer">
-                            <p>To get started, simply sign up for an account and create your first project.</p>
+                            <p>To get started, simply <a href="javascript:void(0)" id="faqSignupButton">sign up for an account</a> and create your first project.</p>
                         </div>
                     </div>
                     <div
@@ -300,7 +300,7 @@
 
             // Setup modals
             setupModal('loginModal', ['loginButton']);
-            setupModal('signupModal', ['introSignupButton', 'signupButton']);
+            setupModal('signupModal', ['faqSignupButton', 'introSignupButton', 'signupButton']);
 
             // FAQ Accordion JavaScript
             document.querySelectorAll('.faq-question').forEach((question) => {
