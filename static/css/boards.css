@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
+
+:root {
+    --color-primary: #091057;
+    --color-secondary: #024caa;
+    --color-tertiary: #ec8305;
+    --color-gray: #d3d3d3;
+}
+
+body,
+header,
+main {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", serif;
+    font-size: 16px;
+}
+
+header {
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#account-menu-button span {
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 200;
+    font-size: 0.8em;
+    height: 22px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 25px;
+}
+
+.drop_down_menu {
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #00000055;
+    color: #000000;
+    position: absolute;
+    right: 10px;
+    text-align: left;
+    top: 40px;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.2s ease;
+    z-index: 1;
+}
+
+.drop_down_menu.active {
+    transform: scaleY(1);
+}
+
+.drop_down_menu h6 {
+    margin: 0;
+    padding: 10px 0 10px 10px;
+}
+
+.account_details {
+    display: flex;
+    gap: 10px;
+    padding: 0 10px 10px;
+}
+
+.account_icon {
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.3em;
+    height: 35px;
+    padding: 3px 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 38px;
+}
+
+.user_email {
+    font-size: 0.8em;
+}

@@ -1,0 +1,61 @@
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+
+{% load static %}
+{% load custom_filters %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Planban{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/boards.css' %}" />
+        <script src="{% static 'js/projects.js' %}" defer></script>
+    </head>
+    <body>
+        {% if not user.is_authenticated %}
+        <script>
+            window.location.href = "/";
+        </script>
+        {% else %}
+        <header>
+            <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="25" />
+            <div id="account-menu-button" onclick="toggleDropdown('account-menu')" aria-label="Account Menu">
+                <span> {{ user|user_initials }} </span>
+                <div class="drop_down_menu" id="account-menu">
+                    <h6 class="account_title">Account</h6>
+                    <div class="account_details">
+                        <div class="account_icon">{{ user|user_initials }}</div>
+                        <div>
+                            <div class="display_name">{{ user|display_name }}</div>
+                            <div class="user_email">{{ user.email }}</div>
+                        </div>
+                    </div>
+                    <a href="#">Manage Account</a>
+                    <hr />
+                    <a href="{{ login_url }}">Login</a>
+                    <a href="{{ signup_url }}">Sign Up</a>
+                    <form id="logout-form" action="{{ logout_url }}" method="post" style="display: none">
+                        {% csrf_token %}
+                    </form>
+                    <a
+                        href="JavaScript:void(0)"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    >
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            <p>&copy; 2025 Planban. All rights reserved.</p>
+        </footer>
+        {% endif %}
+    </body>
+</html>

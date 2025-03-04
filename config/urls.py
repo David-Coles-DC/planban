@@ -23,12 +23,14 @@ from django.conf.urls.static import static
 from django.views.generic import TemplateView
 
 import pprint
+import projects
 
 pprint.pprint(settings.TEMPLATES)
 
 urlpatterns = [
-    path("accounts/", include("allauth.urls")),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('projects/', include('projects.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('', TemplateView.as_view(template_name='home/index.html')),
 ]

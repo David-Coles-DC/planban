@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '.herokuapp.com',
     '127.0.0.1'
+    'localhost'
 ]
 
 # Application definition
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/projects'
 LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
@@ -110,6 +111,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://*.codeinstitute-ide.net/',
     'https://*.herokuapp.com',
     'http://127.0.0.1:8000/'
+    'http://localhost:8000/'
 ]
 
 # Password validation
