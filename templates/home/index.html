@@ -217,7 +217,7 @@
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" required />
                         <label for="message">Message:</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
+                        < id="message" name="message" rows="4" required></>
                         <button type="submit">Send Message</button>
                     </form>
                 </div>
@@ -258,13 +258,19 @@
                     <div>
                         <div>
                             <label for="id_login">Login:</label>
-                            <input type="text" id="id_login" name="login" required placeholder="Username or email" />
+                            <input type="text" name="login" placeholder="Username or email" autocomplete="email" required="" id="id_login">
                         </div>
                     </div>
                     <div>
                         <div>
                             <label for="id_password">Password:</label>
-                            <input type="password" id="id_password" name="password" required Placeholder="Password" />
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required="" aria-describedby="id_password_helptext" id="id_password">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="id_remember">Remember Me:</label>
+                            <input type="checkbox" name="remember" id="id_remember">
                         </div>
                     </div>
                     <button class="button" type="submit">Login</button>
@@ -278,34 +284,43 @@
         <div id="signupModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Signup</h2>
+                <h2>Sign up</h2>
                 <form method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
                     <div>
                         <div>
                             <label for="id_username">Username:</label>
-                            <input type="text" id="id_username" name="username" required />
+                            <input type="text" name="username" placeholder="Username" autocomplete="username" minlength="1" maxlength="150" required="" id="id_username">
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label for="id_email">Email:</label>
-                            <input type="email" id="id_email" name="email" required />
+                            <label for="id_email">Email (optional):</label>
+                            <input type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" id="id_email">
                         </div>
                     </div>
                     <div>
                         <div>
                             <label for="id_password1">Password:</label>
-                            <input type="password" id="id_password1" name="password1" required />
+                            <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" aria-describedby="id_password1_helptext" id="id_password1">
+                            <span class="helptext" id="id_password1_helptext"></span>
                         </div>
                     </div>
                     <div>
+                        <ul>
+                            <li>Your password can’t be too similar to your other personal information.</li>
+                            <li>Your password must contain at least 8 characters.</li>
+                            <li>Your password can’t be a commonly used password.</li>
+                            <li>Your password can’t be entirely numeric.</li>
+                        </ul>
+                    </div>
+                    <div>
                         <div>
-                            <label for="id_password2">Confirm Password:</label>
-                            <input type="password" id="id_password2" name="password2" required />
+                            <label for="id_password2">Password (again):</label>
+                            <input type="password" name="password2" placeholder="Password (again)" autocomplete="new-password" required="" id="id_password2">
                         </div>
                     </div>
-                    <button class="button" type="submit">Signup</button>
+                    <button class="button" type="submit">Sign up</button>
                 </form>
                 <p>Already have an account? <a id="signupToLogin" href="{% url 'account_login' %}">Login</a></p>
             </div>
