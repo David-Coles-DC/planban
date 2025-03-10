@@ -284,7 +284,10 @@
         <div id="signupModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Sign up</h2>
+                <h2>
+                    <span class="logo" aria-hidden></span>
+                    Sign up
+                </h2>
                 <form method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
                     <div>
