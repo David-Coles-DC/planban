@@ -11,30 +11,25 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}Planban{% endblock %}</title>
-        <link rel="stylesheet" href="{% static 'css/boards.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
         <script src="{% static 'js/projects.js' %}" defer></script>
     </head>
     <body>
-        {% if not user.is_authenticated %}
-        <script>
-            window.location.href = "/";
-        </script>
-        {% else %}
         <header>
             <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
             <nav class="desktop">
                 <ul>
                     <li>
-                        <a href="#home">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="#features">Features</a>
+                        <a href="/#features">Features</a>
                     </li>
                     <li>
-                        <a href="#faqs">FAQs</a>
+                        <a href="/#faqs">FAQs</a>
                     </li>
                     <li>
-                        <a href="#contact">Contact Us</a>
+                        <a href="/#contact">Contact Us</a>
                     </li>
                 </ul>
             </nav>
@@ -65,6 +60,5 @@
         <footer>
             <p>&copy; 2025 Planban. All rights reserved.</p>
         </footer>
-        {% endif %}
     </body>
 </html>
