@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<!-- Display Existing Emails -->
+<div class="account_manage">
+    <h2>Manage Your Email Addresses</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for email in user.emailaddress_set.all %}
+            <tr>
+                <td>{{ email.email }}</td>
+                <td>
+                    {% if email.verified %}
+                        ✅ Verified
+                    {% else %}
+                        ❌ Unverified
+                    {% endif %}
+                    {% if email.primary %}
+                        <strong>(Primary)</strong>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not email.verified %}
+                        <form method="post" action="{% url 'account_email' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="email" value="{{ email.email }}" />
+                            <button type="submit" name="action_send">Verify</button>
+                        </form>
+                    {% endif %}
+                    {% if not email.primary %}
+                        <form method="post" action="{% url 'account_email' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="email" value="{{ email.email }}" />
+                            <button type="submit" name="action_primary">Set as Primary</button>
+                        </form>
+                    {% endif %}
+                    <form method="post" action="{% url 'account_email' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="email" value="{{ email.email }}" />
+                        <button type="submit" name="action_remove">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No emails registered.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr />
+
+    <!-- Add New Email -->
+    <h3>Add a New Email Address</h3>
+    <form method="post" action="{% url 'account_email' %}">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit" name="action_add">Add Email</button>
+    </form>
+</div>
+{% endblock %}

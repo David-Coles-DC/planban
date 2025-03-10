@@ -83,3 +83,14 @@ header {
 .user_email {
     font-size: 0.8em;
 }
+
+#account-menu a {
+    color: #000000;
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+}
+
+#account-menu a:hover {
+    background-color: #dedede;
+}
