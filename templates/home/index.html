@@ -49,7 +49,7 @@
                 data-2200-start="top: calc(55vh + -650px);"
             >
                 <a
-                    href="javascript:void(0)"
+                    href="{% url 'account_signup' %}"
                     id="introSignupButton"
                     data-anchor-target=".intro"
                     data-start="left: calc(0% - 80px); opacity: 0;"
@@ -101,7 +101,7 @@
             <nav class="desktop">
                 <ul>
                     <li>
-                        <a href="javascript:void(0)" id="loginButton">Login</a>
+                        <a href="{% url 'account_login' %}" id="loginButton">Login</a>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="button" id="signupButton">Get Started</a>
@@ -249,16 +249,27 @@
         <div id="loginModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Login</h2>
+                <h2>
+                    <span class="logo" aria-hidden></span>
+                    Login
+                </h2>
                 <form method="post" action="{% url 'account_login' %}">
                     {% csrf_token %}
-                    <label for="id_login">Username or Email:</label>
-                    <input type="text" id="id_login" name="login" required />
-                    <label for="id_password">Password:</label>
-                    <input type="password" id="id_password" name="password" required />
-                    <button type="submit">Login</button>
+                    <div>
+                        <div>
+                            <label for="id_login">Username or Email:</label>
+                            <input type="text" id="id_login" name="login" required />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="id_password">Password:</label>
+                            <input type="password" id="id_password" name="password" required />
+                        </div>
+                    </div>
+                    <button class="button" type="submit">Login</button>
                 </form>
-                <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a></p>
+                <p>Don't have an account? <a id="registerToLogin" href="{% url 'account_signup' %}">Sign up</a></p>
                 <p><a href="{% url 'account_reset_password' %}">Forgot your password?</a></p>
             </div>
         </div>
@@ -270,17 +281,33 @@
                 <h2>Signup</h2>
                 <form method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
-                    <label for="id_username">Username:</label>
-                    <input type="text" id="id_username" name="username" required />
-                    <label for="id_email">Email:</label>
-                    <input type="email" id="id_email" name="email" required />
-                    <label for="id_password1">Password:</label>
-                    <input type="password" id="id_password1" name="password1" required />
-                    <label for="id_password2">Confirm Password:</label>
-                    <input type="password" id="id_password2" name="password2" required />
-                    <button type="submit">Signup</button>
+                    <div>
+                        <div>
+                            <label for="id_username">Username:</label>
+                            <input type="text" id="id_username" name="username" required />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="id_email">Email:</label>
+                            <input type="email" id="id_email" name="email" required />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="id_password1">Password:</label>
+                            <input type="password" id="id_password1" name="password1" required />
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="id_password2">Confirm Password:</label>
+                            <input type="password" id="id_password2" name="password2" required />
+                        </div>
+                    </div>
+                    <button class="button" type="submit">Signup</button>
                 </form>
-                <p>Already have an account? <a href="{% url 'account_login' %}">Login</a></p>
+                <p>Already have an account? <a id="signupToLogin" href="{% url 'account_login' %}">Login</a></p>
             </div>
         </div>
         <script>
@@ -309,7 +336,15 @@
 
                 buttonIds.forEach(function (buttonId) {
                     var btn = document.getElementById(buttonId);
-                    btn.onclick = function () {
+                    btn.onclick = function (event) {
+                        event.preventDefault(); // Prevent the default action of the link
+
+                        // Close any open modals
+                        document.querySelectorAll('.modal.open').forEach(function (openModal) {
+                            openModal.classList.remove('open');
+                        });
+
+                        // Open the new modal
                         modal.classList.add('open');
                     };
                 });
@@ -326,8 +361,8 @@
             }
 
             // Setup modals
-            setupModal('loginModal', ['loginButton']);
-            setupModal('signupModal', ['faqSignupButton', 'introSignupButton', 'signupButton']);
+            setupModal('loginModal', ['loginButton', 'signupToLogin']);
+            setupModal('signupModal', ['faqSignupButton', 'introSignupButton', 'signupButton', 'registerToLogin']);
 
             // FAQ Accordion JavaScript
             document.querySelectorAll('.faq-question').forEach((question) => {

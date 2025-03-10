@@ -92,7 +92,6 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -131,6 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
