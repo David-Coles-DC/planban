@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.getElementById('project-title');
+    const projectId = titleElement.dataset.projectId;
 
     titleElement.addEventListener('click', function () {
         const currentTitle = titleElement.innerText;
@@ -19,24 +20,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function saveTitle() {
             const newTitle = input.value;
+            const slug = input.value
+                .toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '');
             titleElement.innerText = newTitle;
             input.replaceWith(titleElement);
 
             // Send the new title to the server
-            fetch('/update-project-title', {
+            fetch(`/projects/update-project-title/${projectId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token if using Django
+                    'X-CSRFToken': getCookie('csrftoken'),
                 },
-                body: JSON.stringify({ title: newTitle, projectId: '{{ project.id }}' }),
+                body: JSON.stringify({ title: newTitle, slug: slug, projectId: projectId }),
             })
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        console.log('Title updated successfully');
+                        const newUrl = `/projects/${slug}/`;
+                        history.pushState(null, '', newUrl);
                     } else {
-                        console.error('Failed to update title');
+                        console.error('Failed to update title', data);
                     }
                 })
                 .catch((error) => {
