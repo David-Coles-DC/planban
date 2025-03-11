@@ -4,17 +4,27 @@
 <div class="main_content" id="projects">
     <div class="page-header">
         <h1>Projects</h1>
-        <button class="button" id="new_project">New Project</button>
+        <button class="button" id="new_project">
+            <i class="fa-solid fa-plus"></i>
+            New Project
+        </button>
     </div>
     <div class="projects">
+        <a href="javascript:void(0)" class="project" id="new_project">
+            <h2>New Project</h2>
+            <p>Create a new project</p>
+        </a>
         {% for project in projects %}
             <a class="project" href="{% url 'project' project.slug %}">
                 <h2>{{ project.title }}</h2>
                 <p>{{ project.short_description }}</p>
             </a>
-        {% empty %}
-        <p>No projects found, please create a new project.</p>
         {% endfor %}
+    </div>
+    {% if projects %}
+    {% else %}
+        <p>No projects found, please create a new project.</p>
+    {% endif %}
 </div>
 
 <!-- New Project Modal -->

@@ -42,6 +42,11 @@ header {
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    transform: scale(1.03);
 }
 
 #account-menu-button span {
@@ -248,12 +253,18 @@ form ul {
 }
 
 .projects a.project {
+    background-color: #091057;
     border: 1px solid #091057;
     border-radius: 5px;
-    color: #000000;
+    color: #ffffff;
     display: block;
     padding: 10px;
     text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.projects a.project:hover {
+    transform: scale(1.03);
 }
 
 .projects a.project h2 {
@@ -274,6 +285,21 @@ form ul {
     padding: 0;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.projects a#new_project {
+    background-color: #cccccc;
+    border: 1px solid #999999;
+    position: relative;
+}
+
+.projects a#new_project:after {
+    content: '\2b';
+    font-family: 'Font Awesome 6 Free';
+    font-size: 1.5em;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 /* Footer styles */
