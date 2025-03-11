@@ -474,13 +474,13 @@ nav.mobile > ul > li > a > i {
 /* Form styles */
 form > div {
     display: flex;
+    margin: 0 0 10px 0;
     width: 100%;
 }
 
 form > div > div {
     display: flex;
     flex-direction: column;
-    margin: 0 0 10px 0;
     width: 100%;
 }
 
