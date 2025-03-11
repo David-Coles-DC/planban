@@ -308,6 +308,14 @@ form ul {
     right: 10px;
 }
 
+#projects .page-header input#title-input {
+    background-color: transparent;
+    border: 1px solid #00000044;
+    font-size: 2em;
+    font-weight: 300 !important;
+    font-family: "Poppins", serif;
+}
+
 /* Footer styles */
 footer {
     background-color: var(--color-primary);
