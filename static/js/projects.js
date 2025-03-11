@@ -36,14 +36,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var slugInput = document.getElementById('slug');
     var slugDisplay = document.getElementById('slug_text');
 
-    titleInput.addEventListener('input', function() {
-        var slug = titleInput.value.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    titleInput.addEventListener('input', function () {
+        var slug = titleInput.value
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '');
         slugInput.value = slug;
         slugDisplay.value = `/projects/${slug}`;
         document.getElementById('newProjectModalError').style.display = '';
     });
 
-    document.getElementById('newProjectForm').onsubmit = function(event) {
+    document.getElementById('newProjectForm').onsubmit = function (event) {
         event.preventDefault();
         var form = this;
         var formData = new FormData(form);
@@ -52,24 +55,25 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: formData,
             headers: {
-                'X-CSRFToken': formData.get('csrfmiddlewaretoken')
-            }
-        }).then(response => response.json())
-          .then(data => {
-              if (data.success) {
-                  location.reload();
-              } else {
-                console.log(data.error);
-                if (data.error === 'Project with this Slug already exists.') {
-                    var errorDisplay = document.getElementById('newProjectModalError');
-                    errorDisplay.textContent = 'This project name already exists.';
-                    errorDisplay.style.display = 'block';
+                'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    window.location.href = '/projects/' + data.slug;
                 } else {
-                    alert('Error creating project');
+                    console.log(data.error);
+                    if (data.error === 'Project with this Slug already exists.') {
+                        var errorDisplay = document.getElementById('newProjectModalError');
+                        errorDisplay.textContent = 'This project name already exists.';
+                        errorDisplay.style.display = 'block';
+                    } else {
+                        alert('Error creating project');
+                    }
                 }
-              }
-          });
-    }
+            });
+    };
 });
 
 // Modal JavaScript
@@ -104,7 +108,7 @@ function setupModal(modalId, buttonIds) {
 }
 
 // Setup modals
-setupModal('newProjectModal', ['new_project']);
+setupModal('newProjectModal', ['new_project', 'new_project_btn']);
 
 function confirmDelete(projectId, projectTitle, event) {
     event.preventDefault();
@@ -114,21 +118,21 @@ function confirmDelete(projectId, projectTitle, event) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            }
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
         })
-        .then(response => {
-            if (response.ok) {
-                // Reload the page or remove the project element from the DOM
-                location.reload();
-            } else {
-                alert("Failed to delete the project.");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Failed to delete the project.");
-        });
+            .then((response) => {
+                if (response.ok) {
+                    // Reload the page or remove the project element from the DOM
+                    location.reload();
+                } else {
+                    alert('Failed to delete the project.');
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Failed to delete the project.');
+            });
     }
 }
 
@@ -139,7 +143,7 @@ function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
             const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            if (cookie.substring(0, name.length + 1) === name + '=') {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }

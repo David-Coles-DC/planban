@@ -18,7 +18,7 @@ def create_project(request):
                 project = form.save(commit=False)
                 project.owner = request.user
                 project.save()
-                return JsonResponse({'success': True})
+                return JsonResponse({'success': True, 'slug': project.slug})
             except IntegrityError:
                 form.add_error('slug', 'Project with this Slug already exists.')
                 return JsonResponse({'success': False, 'error': 'Project with this Slug already exists.'})
