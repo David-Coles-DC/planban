@@ -1,6 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Projects</h1>
-<p>Welcome to the Projects page.</p>
+<div class="main_content" id="projects">
+    <div class="page-header">
+        <h1>Projects</h1>
+        <button class="button" id="new_project">New Project</button>
+    </div>
+    <div class="projects">
+        {% for project in projects %}
+            <a class="project" href="{% url 'project' project.slug %}">
+                <h2>{{ project.title }}</h2>
+                <p>{{ project.short_description }}</p>
+            </a>
+        {% empty %}
+        <p>No projects found, please create a new project.</p>
+        {% endfor %}
+</div>
+
+<!-- New Project Modal -->
+<div id="newProjectModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>New Project</h2>
+        <form id="newProjectForm" method="post" action="{% url 'create_project' %}">
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="text" id="slug_text" value="/projects/" disabled/>
+                    <input type="hidden" id="slug" name="slug" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="short_description">Short Description:</label>
+                    <textarea id="short_description" name="short_description"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="button">Create Project</button>
+        </form>
+        <div id="newProjectModalError" class="error"></div>
+    </div>
+</div>
 {% endblock %}

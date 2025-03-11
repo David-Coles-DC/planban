@@ -16,11 +16,32 @@ main {
     font-size: 16px;
 }
 
+main {
+    margin: 0;
+    padding: 0;
+    min-height: calc(100vh - 181px);
+}
+
 header {
     background-color: var(--color-secondary);
     display: flex;
     justify-content: space-between;
     padding: 10px;
+}
+
+.button {
+    background: #000000;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Poppins", serif;
+    font-weight: 200;
+    font-size: 1em;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
 }
 
 #account-menu-button span {
@@ -93,4 +114,205 @@ header {
 
 #account-menu a:hover {
     background-color: #dedede;
+}
+
+.main_content {
+    margin: 0;
+    padding: 0;
+}
+
+.main_content h1 {
+    margin: 0;
+    font-weight: 200;
+}
+
+.page-header {
+    align-items: center;
+    background-color: #eeeeee;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Modal styles */
+.modal {
+    backdrop-filter: blur(2px);
+    background-color: #00000055;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    overflow: auto;
+    padding-top: 60px;
+    position: fixed;
+    top: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    visibility: hidden;
+    width: 100%;
+    z-index: 10;
+}
+
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 5px;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+    transform: translateY(-50px);
+    position: relative;
+}
+
+.modal.open .modal-content {
+    transform: translateY(0);
+}
+
+.modal-content .close {
+    color: #aaaaaa;
+    cursor: pointer;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;
+    top: 0;
+    transition: color 0.3s ease;
+}
+
+.modal-content .close:hover {
+    color: #000000;
+}
+
+.modal-content h2 {
+    margin: 0 0 10px 0;
+}
+
+#slug_text {
+    border: 1px solid #00000044;
+    font-size: 0.7em;
+    font-style: italic;
+    padding: 3px 10px;
+}
+
+/* Form styles */
+form > div {
+    display: flex;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+form > div > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form input:not([type="checkbox"]), form textarea, form select {
+    font-family: "Poppins", serif;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    width: calc(100% - 20px);
+}
+
+form select {
+    width: calc(100% + 2px);
+}
+
+form ul {
+    font-size: 0.8em;
+}
+
+.error {
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    background-color: #ff000022;
+    margin-top: 10px;
+    padding: 10px;
+    display: none;
+}
+
+/* Projects styles */
+.projects {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.projects a.project {
+    border: 1px solid #091057;
+    border-radius: 5px;
+    color: #000000;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.projects a.project h2 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
+}
+
+.projects a.project p {
+    display: -webkit-box;
+    font-size: 0.8em;
+    height: 58px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    padding: 23px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.footer_inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+footer a {
+    color: var(--color-tertiary);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .social_media {
+    margin-top: 10px;
+}
+
+footer .social_media a {
+    color: #ffffff;
+    font-size: 1.5em;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .social_media a:hover {
+    color: var(--color-tertiary);
+    text-decoration: none;
 }
