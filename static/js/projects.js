@@ -105,3 +105,45 @@ function setupModal(modalId, buttonIds) {
 
 // Setup modals
 setupModal('newProjectModal', ['new_project']);
+
+function confirmDelete(projectId, projectTitle, event) {
+    event.preventDefault();
+    if (confirm(`"Are you sure you want to delete the project '${projectTitle}'?"`)) {
+        // Send a request to delete the project
+        fetch(`/projects/delete/${projectId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Reload the page or remove the project element from the DOM
+                location.reload();
+            } else {
+                alert("Failed to delete the project.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Failed to delete the project.");
+        });
+    }
+}
+
+// Helper function to get the CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

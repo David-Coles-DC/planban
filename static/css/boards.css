@@ -259,6 +259,7 @@ form ul {
     color: #ffffff;
     display: block;
     padding: 10px;
+    position: relative;
     text-decoration: none;
     transition: transform 0.3s ease;
 }
@@ -287,10 +288,15 @@ form ul {
     -webkit-box-orient: vertical;
 }
 
+.projects .delete_project {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 .projects a#new_project {
     background-color: #cccccc;
     border: 1px solid #999999;
-    position: relative;
 }
 
 .projects a#new_project:after {

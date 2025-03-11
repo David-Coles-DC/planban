@@ -18,6 +18,7 @@
             <a class="project" href="{% url 'project' project.slug %}">
                 <h2>{{ project.title }}</h2>
                 <p>{{ project.short_description }}</p>
+                <i class="delete_project fa-solid fa-trash-can" onclick="confirmDelete('{{ project.id }}', '{{ project.title }}', event)"></i>
             </a>
         {% endfor %}
     </div>
