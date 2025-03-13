@@ -5,12 +5,15 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm
-from .models import Project
+from .models import Project, List
+
 
 @login_required
 def index(request):
-    user_projects = Project.objects.filter(owner=request.user)
+    user_projects = Project.objects.filter(owner=request.user)\
+                                   .order_by('-modified_on')
     return render(request, 'projects/index.html', {'projects': user_projects})
+
 
 @login_required
 def create_project(request):
@@ -21,19 +24,52 @@ def create_project(request):
                 project = form.save(commit=False)
                 project.owner = request.user
                 project.save()
+
+                # Create the default lists
+                List.objects.create(
+                    project=project,
+                    title='To Do',
+                    position=0
+                )
+                List.objects.create(
+                    project=project,
+                    title='In Progress',
+                    position=1
+                )
+                List.objects.create(
+                    project=project,
+                    title='Done',
+                    position=2
+                )
+
                 return JsonResponse({'success': True, 'slug': project.slug})
             except IntegrityError:
-                form.add_error('slug', 'Project with this Slug already exists.')
-                return JsonResponse({'success': False, 'error': 'Project with this Slug already exists.'})
+                form.add_error(
+                    'slug',
+                    'Project with this Slug already exists.'
+                )
+                return JsonResponse(
+                    {
+                        'success': False,
+                        'error': 'Project with this Slug already exists.'
+                    }
+                )
         else:
             errors = form.errors.as_json()
             return JsonResponse({'success': False, 'errors': errors})
     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
+
 @login_required
 def project(request, slug):
     project = Project.objects.get(slug=slug, owner=request.user)
-    return render(request, 'projects/board.html', {'project': project})
+    lists = List.objects.filter(project=project).order_by('position')
+    return render(
+        request,
+        'projects/board.html',
+        {'project': project, 'lists': lists}
+    )
+
 
 @login_required
 def delete_project(request, id):
@@ -42,6 +78,7 @@ def delete_project(request, id):
         project.delete()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False}, status=400)
+
 
 @login_required
 def update_project_title(request, id):
@@ -56,9 +93,37 @@ def update_project_title(request, id):
                     project.title = new_title
                     project.slug = new_slug
                     project.save()
-                    return JsonResponse({'success': True, 'slug': project.slug})
+                    return JsonResponse(
+                        {
+                            'success': True,
+                            'slug': project.slug
+                        }
+                    )
                 except IntegrityError:
-                    return JsonResponse({'success': False, 'error': 'Project with this Slug already exists.'})
-            return JsonResponse({'success': False, 'error': 'Slug is required'}, status=400)
-        return JsonResponse({'success': False, 'error': 'Title is required'}, status=400)
-    return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=400)
+                    return JsonResponse(
+                        {
+                            'success': False,
+                            'error': 'Project with this Slug already exists.'
+                        }
+                    )
+            return JsonResponse(
+                {
+                    'success': False,
+                    'error': 'Slug is required'
+                },
+                status=400
+            )
+        return JsonResponse(
+            {
+                'success': False,
+                'error': 'Title is required'
+            },
+            status=400
+        )
+    return JsonResponse(
+        {
+            'success': False,
+            'error': 'Invalid request method'
+        },
+        status=400
+    )

@@ -18,12 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django.conf import settings
-from django.conf.urls.static import static
 
-from django.views.generic import TemplateView
+from home import views
 
 import pprint
-import projects
 
 pprint.pprint(settings.TEMPLATES)
 
@@ -32,5 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/', include('projects.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('', TemplateView.as_view(template_name='home/index.html')),
+    path('', views.home, name='home'),
 ]

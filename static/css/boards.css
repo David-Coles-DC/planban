@@ -316,6 +316,28 @@ form ul {
     font-family: "Poppins", serif;
 }
 
+.page-header a, .page-header a:hover {
+    color: #091057;
+}
+
+.lists {
+    background-color: #dedede;
+    display: flex;
+    gap: 20px;
+    height: calc(100vh - 309px);
+    max-width: 100%;
+    overflow: auto;
+    padding: 20px;
+}
+
+.lists .list {
+    background-color: #d0d0d0;
+    border: 1px solid #a0a0a0;
+    border-radius: 10px;
+    flex: 1 0 300px;
+    padding: 10px;
+}
+
 /* Footer styles */
 footer {
     background-color: var(--color-primary);

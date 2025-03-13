@@ -15,6 +15,11 @@
         <link rel="manifest" href="{% static 'images/site.webmanifest' %}" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
         <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous"></script>
+        {% if is_logged_in %}
+        <script>
+            window.location.href = "/projects";
+        </script>
+        {% endif %}
     </head>
 
     <body>
@@ -204,13 +209,6 @@
                 <div class="section_inner contact">
                     <h2>Contact Us</h2>
                     <p>If you have any questions or need further information, please feel free to contact us.</p>
-                    <!--
-                        <div class="contact-info">
-                            <p><strong>Email:</strong> support@planban.com</p>
-                            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-                            <p><strong>Address:</strong> 123 Planban Street, Project City, PC 12345</p>
-                        </div>
-                    -->
                     <form class="contact-form">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" required />

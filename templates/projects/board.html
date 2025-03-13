@@ -4,7 +4,17 @@
 {% block content %}
 <div class="main_content" id="projects">
     <div class="page-header">
+        <a href="/projects/" aria-label="Back to projects">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <h1 id="project-title" data-project-id="{{ project.id }}">{{ project.title }}</h1>
+    </div>
+    <div class="lists">
+        {% for list in lists %}
+            <div class="list">
+                <div class="list_head">{{ list.title }}</div>
+            </div>
+        {% endfor %}
     </div>
 </div>
 
