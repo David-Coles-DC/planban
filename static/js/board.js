@@ -1,6 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const listsContainer = document.querySelector('.lists');
     const titleElement = document.getElementById('project-title');
     const projectId = titleElement.dataset.projectId;
+
+    var sortable = new Sortable(listsContainer, {
+        animation: 150,
+        handle: '.drag_handle',
+        onEnd: function (e) {
+            var order = sortable.toArray();
+            updateListOrder(order);
+        },
+        dataIdAttr: 'data-id',
+    });
+
+    function updateListOrder(order) {
+        fetch('/projects/update-list-order/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({ order: order }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    console.log('Order updated successfully');
+                } else {
+                    console.error('Failed to update order');
+                }
+            });
+    }
 
     titleElement.addEventListener('click', function () {
         const currentTitle = titleElement.innerText;

@@ -281,6 +281,7 @@ form ul {
     display: -webkit-box;
     font-size: 0.8em;
     height: 58px;
+    line-clamp: 3;
     margin: 0;
     overflow: hidden;
     padding: 0;
@@ -320,6 +321,7 @@ form ul {
     color: #091057;
 }
 
+/* Kanban list styles */
 .lists {
     background-color: #dedede;
     display: flex;
@@ -335,7 +337,18 @@ form ul {
     border: 1px solid #a0a0a0;
     border-radius: 10px;
     flex: 1 0 300px;
+}
+
+.lists .list .list_head {
     padding: 10px;
+}
+
+.drag_handle {
+    cursor: grab;
+}
+
+.sortable-chosen .drag_handle {
+	cursor: grabbing;
 }
 
 /* Footer styles */

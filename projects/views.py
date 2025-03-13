@@ -4,6 +4,8 @@ from django.http import JsonResponse
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from .forms import ProjectForm
 from .models import Project, List
 
@@ -127,3 +129,13 @@ def update_project_title(request, id):
         },
         status=400
     )
+
+
+@csrf_exempt
+@require_POST
+def update_list_order(request):
+    data = json.loads(request.body)
+    order = data.get('order', [])
+    for index, list_id in enumerate(order):
+        List.objects.filter(id=list_id).update(position=index)
+    return JsonResponse({'success': True})

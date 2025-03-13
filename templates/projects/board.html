@@ -11,8 +11,8 @@
     </div>
     <div class="lists">
         {% for list in lists %}
-            <div class="list">
-                <div class="list_head">{{ list.title }}</div>
+            <div class="list" data-id="{{ list.id }}">
+                <div class="list_head drag_handle">{{ list.title }}</div>
             </div>
         {% endfor %}
     </div>
