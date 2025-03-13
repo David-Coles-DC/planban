@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 newItem.classList.add('item');
                 newItem.textContent = data.item.title;
                 listElement.appendChild(newItem);
-                addItemModal.style.display = 'none';
+                addItemModal.classList.remove('open');
                 addItemForm.reset();
             } else {
                 console.error(data.error);

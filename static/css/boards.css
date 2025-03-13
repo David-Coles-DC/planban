@@ -385,6 +385,9 @@ form ul {
 }
 
 .items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     height: 100%;
     margin: 0 10px;
 }
@@ -396,6 +399,12 @@ form ul {
 .lists .list.add_list {
     border: none;
     background-color: #dadada;
+}
+
+.items .item {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .drag_handle {
