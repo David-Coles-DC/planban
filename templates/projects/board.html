@@ -13,6 +13,15 @@
         {% for list in lists %}
             <div class="list" data-id="{{ list.id }}">
                 <div class="list_head drag_handle">{{ list.title }}</div>
+                <div class="items">
+
+                </div>
+                <div class="list_footer">
+                    <button class="add_item button" aria-label="Add Item">
+                        <i class="fa-solid fa-plus"></i>
+                        Add Item
+                    </button>
+                </div>
             </div>
         {% endfor %}
     </div>

@@ -336,10 +336,22 @@ form ul {
     background-color: #d0d0d0;
     border: 1px solid #a0a0a0;
     border-radius: 10px;
+    display: flex;
     flex: 1 0 300px;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .lists .list .list_head {
+    padding: 10px;
+}
+
+.items {
+    height: 100%;
+    margin: 0 10px;
+}
+
+.list_footer {
     padding: 10px;
 }
 
