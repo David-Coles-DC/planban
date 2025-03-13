@@ -80,4 +80,78 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         }
     });
+
+    addItemForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(addItemForm);
+
+        fetch('/projects/add-item/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const listId = formData.get('listId');
+                const listElement = document.querySelector(`.list[data-id="${listId}"] .items`);
+                const newItem = document.createElement('div');
+                newItem.classList.add('item');
+                newItem.textContent = data.item.title;
+                listElement.appendChild(newItem);
+                addItemModal.style.display = 'none';
+                addItemForm.reset();
+            } else {
+                console.error(data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
 });
+
+// Modal JavaScript
+function setupModal(modalId, buttonIds) {
+    var modal = document.getElementById(modalId);
+    var span = modal.getElementsByClassName('close')[0];
+
+    buttonIds.forEach(function (buttonId) {
+        var btn = document.getElementById(buttonId);
+        btn.onclick = function (event) {
+            event.preventDefault(); // Prevent the default action of the link
+
+            // Close any open modals
+            document.querySelectorAll('.modal.open').forEach(function (openModal) {
+                openModal.classList.remove('open');
+            });
+
+            // Open the new modal
+            modal.classList.add('open');
+
+            if (btn.hasAttribute('data-list-id')) {
+                const listId = btn.getAttribute('data-list-id');
+                const listIdInput = document.querySelector('#addItemForm input[name="listId"]');
+                if (listIdInput) {
+                    listIdInput.value = listId;
+                }
+            }
+        };
+    });
+
+    span.onclick = function () {
+        modal.classList.remove('open');
+    };
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.classList.remove('open');
+        }
+    };
+}
+
+const addItemButtons = document.querySelectorAll('.add_item.button');
+const addItemButtonIds = Array.from(addItemButtons).map(button => button.id);
+
+// Setup modals
+setupModal('addItemModal', addItemButtonIds);

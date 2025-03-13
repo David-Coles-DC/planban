@@ -8,6 +8,11 @@ urlpatterns = [
         name='projects_index'
     ),
     path(
+        'add-item/',
+        views.add_item,
+        name='add_item'
+    ),
+    path(
         'create_project/',
         views.create_project,
         name='create_project'

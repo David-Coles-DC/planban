@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 <div class="main_content" id="projects">
     <div class="page-header">
         <a href="/projects/" aria-label="Back to projects">
@@ -10,22 +7,58 @@
         <h1 id="project-title" data-project-id="{{ project.id }}">{{ project.title }}</h1>
     </div>
     <div class="lists">
-        {% for list in lists %}
-            <div class="list" data-id="{{ list.id }}">
-                <div class="list_head drag_handle">{{ list.title }}</div>
-                <div class="items">
-
-                </div>
-                <div class="list_footer">
-                    <button class="add_item button" aria-label="Add Item">
-                        <i class="fa-solid fa-plus"></i>
-                        Add Item
-                    </button>
-                </div>
+        {% for list in lists_with_items %}
+        <div class="list" data-id="{{ list.list.id }}">
+            <div class="list_head drag_handle">{{ list.list.title }}</div>
+            <div class="items">
+                {% for item in list.items %}
+                <div class="item">{{ item.title }}</div>
+                {% endfor %}
             </div>
+            <div class="list_footer">
+                <button class="add_item button trans" id="addItem{{ list.list.id }}" data-list-id="{{ list.list.id }}">
+                    <i class="fa-solid fa-plus"></i>
+                    Add Item
+                </button>
+            </div>
+        </div>
         {% endfor %}
+        <div class="list add_list">
+            <div class="list_footer">
+                <button class="add_list_button button trans">
+                    <i class="fa-solid fa-plus"></i>
+                    Add List
+                </button>
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="{% static 'js/board.js' %}" defer></script>
-{% endblock %}
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>
+                <span class="logo" aria-hidden></span>
+                Add New Item
+            </h2>
+            <form id="addItemForm" method="post">
+                <div>
+                    <div>
+                        <label for="itemTitle">Item Title:</label>
+                        <input type="text" id="itemTitle" name="itemTitle" required>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="itemDescription">Description:</label>
+                        <textarea id="itemDescription" name="itemDescription" rows="3"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="button">Add Item</button>
+                <input type="hidden" id="listId" name="listId">
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/board.js' %}" defer></script>
+    {% endblock %}
+</div>

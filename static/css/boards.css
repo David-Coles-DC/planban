@@ -29,6 +29,33 @@ header {
     padding: 10px;
 }
 
+.logo_outer {
+    align-items: center;
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    left: 50%;
+    max-width: 90%;
+    position: fixed;
+    top: 0;
+    transform: translateX(-50%);
+    width: 600px;
+}
+
+.logo {
+    background: url(/static/images/logo.webp) no-repeat left center / cover;
+    height: 99px;
+    max-height: 14.8vw;
+    width: 100%;
+}
+
+h2 span.logo {
+    display: inline-block;
+    height: 18px;
+    width: 13px;
+    margin: 0 -5px 0 0;
+}
+
 .button {
     background: #000000;
     border: none;
@@ -47,6 +74,17 @@ header {
 
 .button:hover {
     transform: scale(1.03);
+}
+
+.button.trans {
+    color: #000000;
+    background: transparent;
+    padding:5px 10px;
+}
+
+.button.trans:hover {
+    background: #a0a0a0;
+    padding:5px 10px;
 }
 
 #account-menu-button span {
@@ -353,6 +391,11 @@ form ul {
 
 .list_footer {
     padding: 10px;
+}
+
+.lists .list.add_list {
+    border: none;
+    background-color: #dadada;
 }
 
 .drag_handle {

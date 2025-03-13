@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .forms import ProjectForm
-from .models import Project, List
+from .models import Item, List, Project
 
 
 @login_required
@@ -66,10 +66,20 @@ def create_project(request):
 def project(request, slug):
     project = Project.objects.get(slug=slug, owner=request.user)
     lists = List.objects.filter(project=project).order_by('position')
+
+    # Fetch items for each list
+    lists_with_items = []
+    for list in lists:
+        items = list.items.all().order_by('position')
+        lists_with_items.append({
+            'list': list,
+            'items': items
+        })
+
     return render(
         request,
         'projects/board.html',
-        {'project': project, 'lists': lists}
+        {'project': project, 'lists_with_items': lists_with_items}
     )
 
 
@@ -139,3 +149,26 @@ def update_list_order(request):
     for index, list_id in enumerate(order):
         List.objects.filter(id=list_id).update(position=index)
     return JsonResponse({'success': True})
+
+
+@require_POST
+@login_required
+def add_item(request):
+    title = request.POST.get('itemTitle')
+    description = request.POST.get('itemDescription', '')
+    list_id = request.POST.get('listId')
+    print("itemTitle: ", title)
+    print("itemDescription: ", description)
+    print("list_id: ", list_id)
+
+    try:
+        list_obj = List.objects.get(id=list_id, project__owner=request.user)
+        item = Item.objects.create(
+            title=title,
+            description=description,
+            list=list_obj,
+            position=list_obj.items.count()
+        )
+        return JsonResponse({'success': True, 'item': {'title': item.title}})
+    except List.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'List not found'})

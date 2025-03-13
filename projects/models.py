@@ -46,3 +46,15 @@ class List(models.Model):
                 fields=['project', 'title'], name='unique_list_per_project'
             )
         ]
+
+
+class Item(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    list = models.ForeignKey(
+        List, on_delete=models.CASCADE, related_name="items"
+    )
+    position = models.IntegerField(default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
