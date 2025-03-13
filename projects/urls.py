@@ -13,6 +13,11 @@ urlpatterns = [
         name='add_item'
     ),
     path(
+        'add-list/',
+        views.add_list,
+        name='add_list'
+    ),
+    path(
         'create_project/',
         views.create_project,
         name='create_project'
@@ -21,6 +26,11 @@ urlpatterns = [
         'delete/<int:id>/',
         views.delete_project,
         name='delete_project'
+    ),
+    path(
+        'delete-list/<int:id>/',
+        views.delete_list,
+        name='delete_list'
     ),
     path(
         'update-list-order/',

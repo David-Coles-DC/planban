@@ -2,6 +2,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const listsContainer = document.querySelector('.lists');
     const titleElement = document.getElementById('project-title');
     const projectId = titleElement.dataset.projectId;
+    const addListButton = document.getElementById('addListButton');
+    const addListForm = document.getElementById('addListForm');
+    const cancelAddList = document.getElementById('cancelAddList');
+    const listTitleInput = document.getElementById('listTitle');
+
+    addListButton.addEventListener('click', function() {
+        addListButton.style.display = 'none';
+        addListForm.style.display = 'block';
+        listTitleInput.focus();
+    });
+
+    cancelAddList.addEventListener('click', function() {
+        addListForm.style.display = 'none';
+        addListButton.style.display = 'block';
+    });
 
     var sortable = new Sortable(listsContainer, {
         animation: 150,
@@ -81,6 +96,62 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    addListForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(addListForm);
+
+        fetch('/projects/add-list/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const newList = data.list;
+                const newListElement = document.createElement('div');
+                newListElement.classList.add('list');
+                newListElement.setAttribute('data-id', newList.id);
+                const listHead = document.createElement('div');
+                listHead.classList.add('list_head', 'drag_handle');
+                listHead.textContent = newList.title;
+
+                const itemsContainer = document.createElement('div');
+                itemsContainer.classList.add('items');
+
+                const listFooter = document.createElement('div');
+                listFooter.classList.add('list_footer');
+
+                const addItemButton = document.createElement('button');
+                addItemButton.classList.add('add_item', 'button', 'trans');
+                addItemButton.id = `addItem${newList.id}`;
+                addItemButton.setAttribute('data-list-id', newList.id);
+
+                const addItemIcon = document.createElement('i');
+                addItemIcon.classList.add('fa-solid', 'fa-plus');
+                addItemButton.appendChild(addItemIcon);
+                addItemButton.appendChild(document.createTextNode(' Add Item'));
+
+                listFooter.appendChild(addItemButton);
+
+                newListElement.appendChild(listHead);
+                newListElement.appendChild(itemsContainer);
+                newListElement.appendChild(listFooter);
+                
+                listsContainer.insertBefore(newListElement, listsContainer.querySelector('.add_list'));
+
+                addListForm.reset();
+                addListForm.style.display = 'none';
+                addListButton.style.display = 'block';
+            } else {
+                console.error('Failed to add list', data.error);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
     addItemForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(addItemForm);
@@ -155,3 +226,30 @@ const addItemButtonIds = Array.from(addItemButtons).map(button => button.id);
 
 // Setup modals
 setupModal('addItemModal', addItemButtonIds);
+
+function confirmDeleteList(listId) {
+    const confirmation = confirm("Are you sure you want to delete this list and all items within it?");
+    if (confirmation) {
+        // Make an AJAX request to delete the list (assuming you have an endpoint to handle this)
+        fetch(`/projects/delete-list/${listId}/`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the list from the DOM
+                const listElement = document.querySelector(`.list[data-id="${listId}"]`);
+                listElement.remove();
+            } else {
+                alert('Failed to delete the list.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while deleting the list.');
+        });
+    }
+}

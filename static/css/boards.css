@@ -273,6 +273,11 @@ form ul {
     font-size: 0.8em;
 }
 
+.form_buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
 .error {
     color: #ff0000;
     border: 1px solid #ff0000;
@@ -393,6 +398,8 @@ form ul {
 }
 
 .list_footer {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
 }
 
@@ -405,6 +412,10 @@ form ul {
     background-color: #eeeeee;
     border-radius: 5px;
     padding: 10px;
+}
+
+form#addListForm {
+    width: 100%;
 }
 
 .drag_handle {

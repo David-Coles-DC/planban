@@ -4,8 +4,9 @@ from django.http import JsonResponse
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Max
 from .forms import ProjectForm
 from .models import Item, List, Project
 
@@ -139,6 +140,49 @@ def update_project_title(request, id):
         },
         status=400
     )
+
+
+@csrf_exempt
+@require_POST
+@login_required
+def add_list(request):
+    title = request.POST.get('listTitle')
+    project_id = request.POST.get('projectId')
+
+    try:
+        project = Project.objects.get(id=project_id, owner=request.user)
+        max_position = List.objects\
+            .filter(project=project)\
+            .aggregate(Max('position'))['position__max']
+        position = (max_position + 1) if max_position is not None else 0
+
+        new_list = List.objects.create(
+            title=title,
+            project=project,
+            position=position
+        )
+
+        return JsonResponse(
+            {
+                'success': True,
+                'list': {
+                    'id': new_list.id,
+                    'title': new_list.title
+                }
+            }
+        )
+    except Project.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Project not found'})
+
+
+@login_required
+@require_http_methods(['DELETE'])
+def delete_list(request, id):
+    if request.method in ['DELETE']:
+        list_obj = get_object_or_404(List, id=id, project__owner=request.user)
+        list_obj.delete()
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
 
 
 @csrf_exempt
