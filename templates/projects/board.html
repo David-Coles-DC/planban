@@ -12,7 +12,7 @@
             <div class="list_head drag_handle">{{ list.list.title }}</div>
             <div class="items">
                 {% for item in list.items %}
-                <div class="item">{{ item.title }}</div>
+                <div class="item" data-id="{{ item.id }}">{{ item.title }}</div>
                 {% endfor %}
             </div>
             <div class="list_footer">

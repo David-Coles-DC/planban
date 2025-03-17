@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addListButton.style.display = 'block';
     });
 
+    // Initialize Sortable for the lists container
     var sortable = new Sortable(listsContainer, {
         animation: 150,
         handle: '.drag_handle',
@@ -43,6 +44,43 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log('Order updated successfully');
                 } else {
                     console.error('Failed to update order');
+                }
+            });
+    }
+
+    // Initialize Sortable for each list's items container
+    document.querySelectorAll('.items').forEach(function(itemsContainer) {
+        new Sortable(itemsContainer, {
+            group: 'shared',
+            animation: 150,
+            onEnd: function (e) {
+                var fromItemOrder = Array.from(e.from.children).map(item => item.dataset.id);
+                var toItemOrder = Array.from(e.to.children).map(item => item.dataset.id);
+                var newListId = e.to.closest('.list').dataset.id;
+                var oldListId = e.from.closest('.list').dataset.id;
+    
+                updateItemOrder(fromItemOrder, oldListId);
+                updateItemOrder(toItemOrder, newListId);
+            },
+            dataIdAttr: 'data-id',
+        });
+    });
+
+    function updateItemOrder(order, listId) {
+        fetch('/projects/update-item-order/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            body: JSON.stringify({ order: order, listId: listId }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    console.log('Item order updated successfully');
+                } else {
+                    console.error('Failed to update item order', data);
                 }
             });
     }

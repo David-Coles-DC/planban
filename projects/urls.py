@@ -28,6 +28,11 @@ urlpatterns = [
         name='delete_project'
     ),
     path(
+        'update-item-order/',
+        views.update_item_order,
+        name='update_item_order'
+    ),
+    path(
         'delete-list/<int:id>/',
         views.delete_list,
         name='delete_list'

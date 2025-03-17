@@ -5,7 +5,6 @@ from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods, require_POST
-from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Max
 from .forms import ProjectForm
 from .models import Item, List, Project
@@ -142,7 +141,6 @@ def update_project_title(request, id):
     )
 
 
-@csrf_exempt
 @require_POST
 @login_required
 def add_list(request):
@@ -185,14 +183,51 @@ def delete_list(request, id):
     return JsonResponse({'success': False}, status=400)
 
 
-@csrf_exempt
 @require_POST
+@login_required
 def update_list_order(request):
     data = json.loads(request.body)
     order = data.get('order', [])
     for index, list_id in enumerate(order):
         List.objects.filter(id=list_id).update(position=index)
     return JsonResponse({'success': True})
+
+
+@require_POST
+@login_required
+def update_item_order(request):
+    try:
+        data = json.loads(request.body)
+        print(data)
+        order = data.get('order', [])
+        new_list_id = data.get('listId')
+
+        # Ensure the new list exists
+        new_list = List.objects.get(
+            id=new_list_id,
+            project__owner=request.user
+        )
+
+        # Update the order and list of items
+        for index, item_id in enumerate(order):
+            item = Item.objects.get(id=item_id)
+            item.list = new_list
+            item.position = index
+            item.save()
+
+        return JsonResponse({'success': True})
+    except List.DoesNotExist:
+        return JsonResponse(
+            {'success': False, 'error': 'List not found'},
+            status=404
+        )
+    except Item.DoesNotExist:
+        return JsonResponse(
+            {'success': False, 'error': 'Item not found'},
+            status=404
+        )
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=400)
 
 
 @require_POST
