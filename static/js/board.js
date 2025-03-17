@@ -134,6 +134,50 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    document.querySelectorAll('.list_head').forEach(function(listTitleElement) {
+        listTitleElement.addEventListener('click', function () {
+            const currentTitle = listTitleElement.innerText;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentTitle;
+            input.classList.add('list-title-input');
+            listTitleElement.replaceWith(input);
+            input.focus();
+
+            input.addEventListener('blur', saveListTitle);
+            input.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    saveListTitle();
+                }
+            });
+
+            function saveListTitle() {
+                const newTitle = input.value;
+                listTitleElement.innerText = newTitle;
+                input.replaceWith(listTitleElement);
+
+                // Send the new title to the server
+                fetch(`/projects/update-list-title/${listTitleElement.dataset.listId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                    body: JSON.stringify({ title: newTitle, listId: listTitleElement.dataset.listId }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (!data.success) {
+                            console.error('Failed to update list title', data);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    });
+
     addListForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(addListForm);

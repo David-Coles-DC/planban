@@ -389,6 +389,15 @@ form ul {
     padding: 10px;
 }
 
+input.list-title-input {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    font-family: "Poppins", serif;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
 .items {
     display: flex;
     flex-direction: column;

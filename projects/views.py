@@ -92,50 +92,70 @@ def delete_project(request, id):
     return JsonResponse({'success': False}, status=400)
 
 
+@require_POST
 @login_required
 def update_project_title(request, id):
-    if request.method == 'POST':
-        project = get_object_or_404(Project, id=id, owner=request.user)
-        data = json.loads(request.body)
-        new_title = data.get('title')
-        new_slug = data.get('slug')
-        if new_title:
-            if new_slug:
-                try:
-                    project.title = new_title
-                    project.slug = new_slug
-                    project.save()
-                    return JsonResponse(
-                        {
-                            'success': True,
-                            'slug': project.slug
-                        }
-                    )
-                except IntegrityError:
-                    return JsonResponse(
-                        {
-                            'success': False,
-                            'error': 'Project with this Slug already exists.'
-                        }
-                    )
-            return JsonResponse(
-                {
-                    'success': False,
-                    'error': 'Slug is required'
-                },
-                status=400
-            )
+    project = get_object_or_404(Project, id=id, owner=request.user)
+    data = json.loads(request.body)
+    new_title = data.get('title')
+    new_slug = data.get('slug')
+    if new_title:
+        if new_slug:
+            try:
+                project.title = new_title
+                project.slug = new_slug
+                project.save()
+                return JsonResponse(
+                    {
+                        'success': True,
+                        'slug': project.slug
+                    }
+                )
+            except IntegrityError:
+                return JsonResponse(
+                    {
+                        'success': False,
+                        'error': 'Project with this Slug already exists.'
+                    }
+                )
         return JsonResponse(
             {
                 'success': False,
-                'error': 'Title is required'
+                'error': 'Slug is required'
             },
             status=400
         )
     return JsonResponse(
         {
             'success': False,
-            'error': 'Invalid request method'
+            'error': 'Title is required'
+        },
+        status=400
+    )
+
+
+@require_POST
+@login_required
+def update_list_title(request, id):
+    list = get_object_or_404(List, id=id, project__owner=request.user)
+    data = json.loads(request.body)
+    new_title = data.get('title')
+    if new_title:
+        try:
+            list.title = new_title
+            list.save()
+            return JsonResponse({'success': True})
+        except IntegrityError:
+            return JsonResponse(
+                {
+                    'success': False,
+                    'error': 'List with this title already exists.'
+                }
+            )
+    return JsonResponse(
+        {
+            'success': False,
+            'error': 'Title is required'
         },
         status=400
     )

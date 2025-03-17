@@ -43,6 +43,11 @@ urlpatterns = [
         name='update_list_order'
     ),
     path(
+        'update-list-title/<int:id>/',
+        views.update_list_title,
+        name='update_list_title'
+    ),
+    path(
         'update-project-title/<int:id>/',
         views.update_project_title,
         name='update_project_title'

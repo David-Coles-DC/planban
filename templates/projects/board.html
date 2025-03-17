@@ -9,7 +9,7 @@
     <div class="lists">
         {% for list in lists_with_items %}
         <div class="list" data-id="{{ list.list.id }}">
-            <div class="list_head drag_handle">{{ list.list.title }}</div>
+            <div class="list_head drag_handle" data-list-id="{{ list.list.id }}">{{ list.list.title }}</div>
             <div class="items">
                 {% for item in list.items %}
                 <div class="item" data-id="{{ item.id }}">{{ item.title }}</div>
