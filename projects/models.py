@@ -55,6 +55,15 @@ class Item(models.Model):
     list = models.ForeignKey(
         List, on_delete=models.CASCADE, related_name="items"
     )
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    depends_on = models.ManyToManyField("self", blank=True, symmetrical=False)
+    progress = models.IntegerField(default=0)
     position = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     modified_on = models.DateTimeField(auto_now=True)
+
+    def duration(self):
+        if self.start_date and self.end_date:
+            return (self.end_date - self.start_date).days
+        return None

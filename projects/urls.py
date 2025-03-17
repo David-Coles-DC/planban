@@ -8,11 +8,6 @@ urlpatterns = [
         name='projects_index'
     ),
     path(
-        'add-item/',
-        views.add_item,
-        name='add_item'
-    ),
-    path(
         'add-list/',
         views.add_list,
         name='add_list'
@@ -28,14 +23,24 @@ urlpatterns = [
         name='delete_project'
     ),
     path(
-        'update-item-order/',
-        views.update_item_order,
-        name='update_item_order'
+        'delete-item/<int:id>/',
+        views.delete_item,
+        name='delete_item'
     ),
     path(
         'delete-list/<int:id>/',
         views.delete_list,
         name='delete_list'
+    ),
+    path(
+        'save-item/',
+        views.save_item,
+        name='save_item'
+    ),
+    path(
+        'update-item-order/',
+        views.update_item_order,
+        name='update_item_order'
     ),
     path(
         'update-list-order/',
@@ -56,5 +61,10 @@ urlpatterns = [
         '<slug:slug>/',
         views.project,
         name='project'
+    ),
+    path(
+        '<slug:slug>/table',
+        views.project_table,
+        name='project_table'
     ),
 ]

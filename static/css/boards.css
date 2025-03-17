@@ -174,7 +174,34 @@ h2 span.logo {
     background-color: #eeeeee;
     display: flex;
     gap: 20px;
+    justify-content: space-between;
     padding: 20px;
+}
+
+.page-header > div:nth-of-type(1) {
+    align-items: center;
+    display: flex;
+    gap: 20px;
+}
+
+.page-header > div:nth-of-type(2) {
+    background: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+}
+
+.page-header > div:nth-of-type(2) div, .page-header > div:nth-of-type(2) a {
+    border-right: 1px solid #eeeeee;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.page-header > div:nth-of-type(2) div {
+    background-color: #dddddd;
+    color: #000000;
 }
 
 /* Modal styles */
@@ -361,7 +388,7 @@ form ul {
     font-family: "Poppins", serif;
 }
 
-.page-header a, .page-header a:hover {
+.page-header a.back, .page-header a.back:hover {
     color: #091057;
 }
 
@@ -421,6 +448,7 @@ input.list-title-input {
 .items .item {
     background-color: #eeeeee;
     border-radius: 5px;
+    cursor: pointer;
     padding: 10px;
 }
 

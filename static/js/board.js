@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const addListForm = document.getElementById('addListForm');
     const cancelAddList = document.getElementById('cancelAddList');
     const listTitleInput = document.getElementById('listTitle');
+    const editItemModal = document.getElementById('editItemModal');
+    const editItemForm = document.getElementById('editItemForm');
+    const modalTitle = document.getElementById('modalTitle');
+    const itemTitle = document.getElementById('itemTitle');
+    const itemDescription = document.getElementById('itemDescription');
+    const listIdInput = document.getElementById('listId');
+    const itemIdInput = document.getElementById('itemId');
+    const submitButton = editItemForm.querySelector('button[type="submit"]');
+    const deleteItemButton = document.getElementById('deleteItemButton');
 
     addListButton.addEventListener('click', function() {
         addListButton.style.display = 'none';
@@ -234,11 +243,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error:', error));
     });
 
-    addItemForm.addEventListener('submit', function(event) {
+    editItemForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const formData = new FormData(addItemForm);
+        const formData = new FormData(editItemForm);
 
-        fetch('/projects/add-item/', {
+        fetch('/projects/save-item/', {
             method: 'POST',
             body: formData,
             headers: {
@@ -250,64 +259,107 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 const listId = formData.get('listId');
                 const listElement = document.querySelector(`.list[data-id="${listId}"] .items`);
-                const newItem = document.createElement('div');
-                newItem.classList.add('item');
-                newItem.textContent = data.item.title;
-                listElement.appendChild(newItem);
-                addItemModal.classList.remove('open');
-                addItemForm.reset();
+                if (formData.get('itemId')) {
+                    const itemElement = document.querySelector(`.item[data-id="${formData.get('itemId')}"]`);
+                    itemElement.textContent = data.item.title;
+                    itemElement.setAttribute('data-title', data.item.title);
+                    itemElement.setAttribute('data-description', data.item.description);
+                } else {
+                    const newItem = document.createElement('div');
+                    newItem.classList.add('item');
+                    newItem.setAttribute('data-id', data.item.id);
+                    newItem.setAttribute('data-title', data.item.title);
+                    newItem.setAttribute('data-description', data.item.description);
+                    newItem.textContent = data.item.title;
+                    listElement.appendChild(newItem);
+                }
+                editItemModal.classList.remove('open');
+                editItemForm.reset();
+                deleteItemButton.style.display = 'none';
             } else {
                 console.error(data.error);
             }
         })
         .catch(error => console.error('Error:', error));
     });
-});
 
-// Modal JavaScript
-function setupModal(modalId, buttonIds) {
-    var modal = document.getElementById(modalId);
-    var span = modal.getElementsByClassName('close')[0];
+    document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('click', function() {
+            const itemIdValue = this.getAttribute('data-id');
+            const itemTitleValue = this.getAttribute('data-title');
+            const itemDescriptionValue = this.getAttribute('data-description');
 
-    buttonIds.forEach(function (buttonId) {
-        var btn = document.getElementById(buttonId);
-        btn.onclick = function (event) {
-            event.preventDefault(); // Prevent the default action of the link
+            itemTitle.value = itemTitleValue;
+            itemDescription.value = itemDescriptionValue;
+            itemIdInput.value = itemIdValue;
+            listIdInput.value = this.closest('.list').getAttribute('data-id');
 
-            // Close any open modals
-            document.querySelectorAll('.modal.open').forEach(function (openModal) {
-                openModal.classList.remove('open');
-            });
-
-            // Open the new modal
-            modal.classList.add('open');
-
-            if (btn.hasAttribute('data-list-id')) {
-                const listId = btn.getAttribute('data-list-id');
-                const listIdInput = document.querySelector('#addItemForm input[name="listId"]');
-                if (listIdInput) {
-                    listIdInput.value = listId;
-                }
-            }
-        };
+            modalTitle.textContent = 'Edit Item';
+            submitButton.textContent = 'Edit Item';
+            deleteItemButton.style.display = 'block';
+            editItemModal.classList.add('open');
+        });
     });
 
-    span.onclick = function () {
-        modal.classList.remove('open');
-    };
+    const addItemButtons = document.querySelectorAll('.add_item');
+    addItemButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            itemTitle.value = '';
+            itemDescription.value = '';
+            itemIdInput.value = '';
+            listIdInput.value = this.getAttribute('data-list-id');
 
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.classList.remove('open');
+            modalTitle.textContent = 'Add New Item';
+            submitButton.textContent = 'Add Item';
+            deleteItemButton.style.display = 'none';
+            editItemModal.classList.add('open');
+        });
+    });
+
+    deleteItemButton.addEventListener('click', function() {
+        const itemId = itemIdInput.value;
+        if (itemId) {
+            const confirmation = confirm("Are you sure you want to delete this item?");
+            if (confirmation) {
+                fetch(`/projects/delete-item/${itemId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
+                        itemElement.remove();
+                        editItemModal.classList.remove('open');
+                        editItemForm.reset();
+                        deleteItemButton.style.display = 'none';
+                    } else {
+                        alert('Failed to delete the item.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the item.');
+                });
+            }
         }
-    };
-}
+    });
 
-const addItemButtons = document.querySelectorAll('.add_item.button');
-const addItemButtonIds = Array.from(addItemButtons).map(button => button.id);
+    const closeModalButtons = document.querySelectorAll('.modal .close');
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.closest('.modal').classList.remove('open');
+        });
+    });
 
-// Setup modals
-setupModal('addItemModal', addItemButtonIds);
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('open');
+        }
+    });
+});
 
 function confirmDeleteList(listId) {
     const confirmation = confirm("Are you sure you want to delete this list and all items within it?");

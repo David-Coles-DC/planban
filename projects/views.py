@@ -84,6 +84,27 @@ def project(request, slug):
 
 
 @login_required
+def project_table(request, slug):
+    project = Project.objects.get(slug=slug, owner=request.user)
+    lists = List.objects.filter(project=project).order_by('position')
+
+    # Fetch items for each list
+    lists_with_items = []
+    for list in lists:
+        items = list.items.all().order_by('position')
+        lists_with_items.append({
+            'list': list,
+            'items': items
+        })
+
+    return render(
+        request,
+        'projects/table.html',
+        {'project': project, 'lists_with_items': lists_with_items}
+    )
+
+
+@login_required
 def delete_project(request, id):
     if request.method == 'POST':
         project = get_object_or_404(Project, id=id, owner=request.user)
@@ -252,22 +273,71 @@ def update_item_order(request):
 
 @require_POST
 @login_required
-def add_item(request):
+def save_item(request):
     title = request.POST.get('itemTitle')
     description = request.POST.get('itemDescription', '')
     list_id = request.POST.get('listId')
-    print("itemTitle: ", title)
-    print("itemDescription: ", description)
-    print("list_id: ", list_id)
+    item_id = request.POST.get('itemId')
 
     try:
         list_obj = List.objects.get(id=list_id, project__owner=request.user)
-        item = Item.objects.create(
-            title=title,
-            description=description,
-            list=list_obj,
-            position=list_obj.items.count()
-        )
-        return JsonResponse({'success': True, 'item': {'title': item.title}})
+
+        if item_id:
+            # Update existing item
+            item = Item.objects.get(
+                id=item_id,
+                list__project__owner=request.user
+            )
+            item.title = title
+            item.description = description
+            item.save()
+        else:
+            # Create new item
+            item = Item.objects.create(
+                title=title,
+                description=description,
+                list=list_obj,
+                position=list_obj.items.count()
+            )
+
+        return JsonResponse({
+            'success': True,
+            'item': {
+                'id': item.id,
+                'title': item.title,
+                'description': item.description,
+                'list_id': list_obj.id
+            }
+        })
     except List.DoesNotExist:
-        return JsonResponse({'success': False, 'error': 'List not found'})
+        return JsonResponse(
+            {'success': False, 'error': 'List not found'},
+            status=404
+        )
+    except Item.DoesNotExist:
+        return JsonResponse(
+            {'success': False, 'error': 'Item not found'},
+            status=404
+        )
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=400)
+
+
+@login_required
+@require_http_methods(['DELETE'])
+def delete_item(request, id):
+    try:
+        item = get_object_or_404(
+            Item,
+            id=id,
+            list__project__owner=request.user
+        )
+        item.delete()
+        return JsonResponse({'success': True})
+    except Item.DoesNotExist:
+        return JsonResponse(
+            {'success': False, 'error': 'Item not found'},
+            status=404
+        )
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=400)

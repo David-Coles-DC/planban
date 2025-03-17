@@ -8,12 +8,12 @@
             <h1 id="project-title" data-project-id="{{ project.id }}">{{ project.title }}</h1>
         </div>
         <div>
-            <div class="project_view active">
+            <a href="/projects/{{ project.slug }}" class="project_view active">
                 Kanban
-            </div>
-            <a href="/projects/{{ project.slug }}/table" class="project_view">
-                Table
             </a>
+            <div class="project_view active">
+                Table
+            </div>
         </div>
     </div>
     <div class="lists">
