@@ -290,9 +290,10 @@ form ul {
 
 /* Projects styles */
 .projects {
-    padding: 20px;
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    padding: 20px;
 }
 
 .projects a.project {
@@ -447,8 +448,16 @@ footer {
 .footer_inner {
     align-items: center;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     justify-content: space-between;
     padding: 20px;
+}
+
+@media all and (min-width: 730px) {
+    .footer_inner {
+        flex-direction: row;
+    }
 }
 
 footer a {
