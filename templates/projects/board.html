@@ -33,7 +33,18 @@
             </div>
             <div class="items">
                 {% for item in list.items %}
-                <div class="item" data-id="{{ item.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}" tabindex="0">{{ item.title }}</div>
+                <div class="item" data-id="{{ item.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}" tabindex="0">
+                    {{ item.title }}
+                    
+                    <div class="item_control">
+                        <span class="move_up button trans" data-item-id="{{ item.id }}" role="button" tabindex="0">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </span>
+                        <span class="move_down button trans" data-item-id="{{ item.id }}" role="button" tabindex="0">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
             <div class="list_footer">

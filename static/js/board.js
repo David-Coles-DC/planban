@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const listsContainer = document.querySelector('.lists');
+    const itemsContainer = document.querySelector('.items');
     const titleElement = document.getElementById('project-title');
     const projectId = titleElement.dataset.projectId;
     const addListButton = document.getElementById('addListButton');
@@ -165,6 +166,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function moveItemUp(itemId) {
+        const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
+        if (itemElement) {
+            const previousElement = itemElement.previousElementSibling;
+            const listId = itemElement.closest('.list').dataset.id;
+            if (previousElement && previousElement.classList.contains('item')) {
+                itemsContainer.insertBefore(itemElement, previousElement);
+                updateItemOrder(Array.from(itemsContainer.children).map(item => item.dataset.id), listId);
+            }
+        }
+    }
+
+    function moveItemDown(itemId) {
+        const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
+        if (itemElement) {
+            const nextElement = itemElement.nextElementSibling;
+            const listId = itemElement.closest('.list').dataset.id;
+            if (nextElement && nextElement.classList.contains('item')) {
+                itemsContainer.insertBefore(nextElement, itemElement);
+                updateItemOrder(Array.from(itemsContainer.children).map(item => item.dataset.id), listId);
+            }
+        }
+    }
+
     document.querySelectorAll('.move_left').forEach(span => {
         span.addEventListener('click', function() {
             moveListLeft(this.dataset.listId);
@@ -183,6 +208,31 @@ document.addEventListener('DOMContentLoaded', function () {
         span.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 moveListRight(this.dataset.listId);
+            }
+        });
+    });
+
+    document.querySelectorAll('.move_up').forEach(span => {
+        span.addEventListener('click', function(event) {
+            event.stopPropagation();
+            moveItemUp(this.dataset.itemId);
+        });
+        span.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                moveItemUp(this.dataset.itemId);
+            }
+        });
+    });
+
+    document.querySelectorAll('.move_down').forEach(span => {
+        span.addEventListener('click', function(event) {
+            event.stopPropagation();
+            moveItemDown(this.dataset.itemId);
+        });
+        span.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+            event.stopPropagation();
+                moveItemDown(this.dataset.itemId);
             }
         });
     });

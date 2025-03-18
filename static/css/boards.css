@@ -460,6 +460,19 @@ input.list-title-input {
     margin: 0 10px;
 }
 
+.item_control {
+    display: flex;
+    flex-direction: column;
+}
+
+.items .item:first-child .move_up {
+    display: none;
+}
+
+.items .item:last-child .move_down {
+    display: none;
+}
+
 .list_footer {
     display: flex;
     justify-content: space-between;
@@ -475,6 +488,8 @@ input.list-title-input {
     background-color: #eeeeee;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
 }
 
