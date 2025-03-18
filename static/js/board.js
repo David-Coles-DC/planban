@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     const listsContainer = document.querySelector('.lists');
-    const itemsContainer = document.querySelector('.items');
     const titleElement = document.getElementById('project-title');
     const projectId = titleElement.dataset.projectId;
     const addListButton = document.getElementById('addListButton');
@@ -168,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function moveItemUp(itemId) {
         const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
+        const itemsContainer = itemElement.closest('.items');
         if (itemElement) {
             const previousElement = itemElement.previousElementSibling;
             const listId = itemElement.closest('.list').dataset.id;
@@ -180,6 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function moveItemDown(itemId) {
         const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
+        const itemsContainer = itemElement.closest('.items');
         if (itemElement) {
             const nextElement = itemElement.nextElementSibling;
             const listId = itemElement.closest('.list').dataset.id;
