@@ -479,7 +479,7 @@ input.list-title-input {
     padding: 10px;
 }
 
-.lists .list.add_list {
+.lists .list.add_list, .items_table .item.add_item {
     border: none;
     background-color: #dadada;
 }
@@ -504,6 +504,36 @@ form#addListForm {
 .sortable-chosen .drag_handle {
 	cursor: grabbing;
 }
+
+/* Table view styles */
+.items_table {
+    background-color: #dedede;
+    display: flex;
+    gap: 20px;
+    height: calc(100vh - 309px);
+    max-width: 100%;
+    overflow: auto;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.items_table .item {
+    background-color: #eeeeee;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.items_table .item span {
+    font-size: 0.8em;
+    background: #666666;
+    color: #ffffff;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
 
 /* Footer styles */
 footer {
