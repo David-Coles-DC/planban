@@ -78,9 +78,11 @@ h2 span.logo {
 
 .strap {
     font-size: 1.5em;
+    font-weight: 100;
     left: 50%;
     letter-spacing: 0.2em;
     line-height: 1.3em;
+    margin: 0;
     position: absolute;
     text-align: center;
     top: 46vh;
@@ -131,17 +133,22 @@ body.is_mobile .intro_buttons {
 }
 
 .scroll_down {
-    bottom: 25px;
-    left: 50%;
+    background: #00000055;
+    background: linear-gradient(180deg, #00000000 0%, #00000099 100%);
+    bottom: 0;
+    height: 56px;
+    padding: 20px 0;
     position: fixed;
-    transform: translateX(-50%);
+    width: 100%;
 }
 
 .scroll_down .mouse {
     border: 2px solid #ffffff55;
     border-radius: 50px;
     height: 50px;
+    left: 50%;
     position: relative;
+    transform: translateX(-50%);
     width: 30px;
 }
 
@@ -173,7 +180,7 @@ body.is_mobile .intro_buttons {
     width: 110px;
     left: 50%;
     transform: translateX(-50%);
-    top: 25px;
+    top: 44px;
 }
 
 @keyframes scrolldown {
