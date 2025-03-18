@@ -85,7 +85,7 @@ h2 span.logo {
     text-align: center;
     top: 46vh;
     transform: translateX(-50%);
-    width: 375px;
+    width: 350px;
 }
 
 .intro_buttons {
@@ -285,6 +285,33 @@ nav.mobile > ul > li > a > i {
     nav.mobile {
         display: none;
     }
+}
+
+nav ul.mobile-menu {
+    background: #ffffffdd;
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 1;
+}
+
+nav ul.mobile-menu.open {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+nav ul.mobile-menu li {
+    width: calc(100% - 20px);
+}
+
+nav ul.mobile-menu a {
+    padding: 5px 20px;
 }
 
 
