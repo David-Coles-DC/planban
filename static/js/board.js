@@ -169,18 +169,34 @@ document.addEventListener('DOMContentLoaded', function () {
         span.addEventListener('click', function() {
             moveListLeft(this.dataset.listId);
         });
+        span.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                moveListLeft(this.dataset.listId);
+            }
+        });
     });
 
     document.querySelectorAll('.move_right').forEach(span => {
         span.addEventListener('click', function() {
             moveListRight(this.dataset.listId);
         });
+        span.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                moveListRight(this.dataset.listId);
+            }
+        });
     });
 
-    document.querySelectorAll('.edit_title').forEach(button => {
-        button.addEventListener('click', function() {
+    document.querySelectorAll('.edit_title').forEach(span => {
+        span.addEventListener('click', function() {
             const listId = this.dataset.listId;
             editListTitle(listId);
+        });
+        span.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                const listId = this.dataset.listId;
+                editListTitle(listId);
+            }
         });
     });
 
@@ -201,7 +217,9 @@ document.addEventListener('DOMContentLoaded', function () {
         listTitleElement.replaceWith(input);
         input.focus();
 
-        input.addEventListener('blur', saveListTitle);
+        input.addEventListener('blur', function () {
+            setTimeout(saveListTitle, 100);
+        });
         input.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 saveListTitle();
@@ -211,7 +229,9 @@ document.addEventListener('DOMContentLoaded', function () {
         function saveListTitle() {
             const newTitle = input.value;
             listTitleElement.innerText = newTitle;
-            input.replaceWith(listTitleElement);
+            if (document.body.contains(input)) {
+                input.replaceWith(listTitleElement);
+            }
 
             // Send the new title to the server
             fetch(`/projects/update-list-title/${listId}/`, {
