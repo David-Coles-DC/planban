@@ -20,9 +20,20 @@
         {% for list in lists_with_items %}
         <div class="list" data-id="{{ list.list.id }}">
             <div class="list_head drag_handle" data-list-id="{{ list.list.id }}">{{ list.list.title }}</div>
+            <div class="list_control">
+                <span class="move_left button trans" {% if forloop.first %}style="display: none;"{% endif %} data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </span>
+                <span class="move_right button trans" {% if forloop.last %}style="display: none;"{% endif %} data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+                <span class="edit_title button trans" onclick="editListTitle('{{ list.list.id }}')" role="button" tabindex="0">
+                    <i class="fa-solid fa-pen"></i>
+                </span>
+            </div>
             <div class="items">
                 {% for item in list.items %}
-                <div class="item" data-id="{{ item.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}">{{ item.title }}</div>
+                <div class="item" data-id="{{ item.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}" tabindex="0">{{ item.title }}</div>
                 {% endfor %}
             </div>
             <div class="list_footer">
@@ -64,37 +75,37 @@
             </div>
         </div>
     </div>
-
-    <div id="editItemModal" class="modal">
-        <div class="modal-content">
-            <span class="close" tabindex="0">&times;</span>
-            <h2 id="modalTitle">
-                <span class="logo" aria-hidden></span>
-                Add New Item
-            </h2>
-            <form id="editItemForm" method="post">
-                <div>
-                    <div>
-                        <label for="itemTitle">Item Title:</label>
-                        <input type="text" id="itemTitle" name="itemTitle" required>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="itemDescription">Description:</label>
-                        <textarea id="itemDescription" name="itemDescription" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="form_buttons">
-                    <button type="submit" class="button">Add Item</button>
-                    <button type="button" class="button delete" id="deleteItemButton" style="display: none;">Delete Item</button>
-                </div>
-                <input type="hidden" id="listId" name="listId">
-                <input type="hidden" id="itemId" name="itemId">
-            </form>
-        </div>
-    </div>
-
-    <script src="{% static 'js/board.js' %}" defer></script>
-    {% endblock %}
 </div>
+
+<div id="editItemModal" class="modal">
+    <div class="modal-content">
+        <span class="close" tabindex="0">&times;</span>
+        <h2 id="modalTitle">
+            <span class="logo" aria-hidden></span>
+            Add New Item
+        </h2>
+        <form id="editItemForm" method="post">
+            <div>
+                <div>
+                    <label for="itemTitle">Item Title:</label>
+                    <input type="text" id="itemTitle" name="itemTitle" required>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="itemDescription">Description:</label>
+                    <textarea id="itemDescription" name="itemDescription" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form_buttons">
+                <button type="submit" class="button">Add Item</button>
+                <button type="button" class="button delete" id="deleteItemButton" style="display: none;">Delete Item</button>
+            </div>
+            <input type="hidden" id="listId" name="listId">
+            <input type="hidden" id="itemId" name="itemId">
+        </form>
+    </div>
+</div>
+
+<script src="{% static 'js/board.js' %}" defer></script>
+{% endblock %}

@@ -187,6 +187,40 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    function moveListLeft(listId) {
+        const listElement = document.querySelector(`.list[data-id="${listId}"]`);
+        if (listElement) {
+            const previousElement = listElement.previousElementSibling;
+            if (previousElement && previousElement.classList.contains('list')) {
+                listsContainer.insertBefore(listElement, previousElement);
+                updateListOrder(Array.from(listsContainer.children).map(list => list.dataset.id));
+            }
+        }
+    }
+
+    function moveListRight(listId) {
+        const listElement = document.querySelector(`.list[data-id="${listId}"]`);
+        if (listElement) {
+            const nextElement = listElement.nextElementSibling;
+            if (nextElement && nextElement.classList.contains('list')) {
+                listsContainer.insertBefore(nextElement, listElement);
+                updateListOrder(Array.from(listsContainer.children).map(list => list.dataset.id));
+            }
+        }
+    }
+
+    document.querySelectorAll('.move_left').forEach(span => {
+        span.addEventListener('click', function() {
+            moveListLeft(this.dataset.listId);
+        });
+    });
+
+    document.querySelectorAll('.move_right').forEach(span => {
+        span.addEventListener('click', function() {
+            moveListRight(this.dataset.listId);
+        });
+    });
+
     addListForm.addEventListener('submit', function(event) {
         event.preventDefault();
         const formData = new FormData(addListForm);

@@ -48,13 +48,14 @@
                     </div>
                     <a href="{{ account_change_password }}">Manage Your Password</a>
                     <a href="{{ account_email }}">Manage Your Email Address</a>
-                    <hr />
+                    <hr>
                     <form id="logout-form" action="{{ logout_url }}" method="post" style="display: none">
                         {% csrf_token %}
                     </form>
                     <a
-                        href="JavaScript:void(0)"
+                        href="#"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        role="button"
                     >
                         Logout
                     </a>

@@ -112,7 +112,6 @@ h2 span.logo {
     right: 10px;
     text-align: left;
     top: 40px;
-    transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.2s ease;
     z-index: 1;
@@ -120,7 +119,6 @@ h2 span.logo {
 
 .drop_down_menu.active {
     display: block;
-    transform: scaleY(1);
 }
 
 .drop_down_menu h6 {
@@ -325,7 +323,7 @@ form ul {
     padding: 20px;
 }
 
-.projects a.project {
+.projects .project {
     background-color: #091057;
     border: 1px solid #091057;
     border-radius: 5px;
@@ -337,11 +335,16 @@ form ul {
     transition: transform 0.3s ease;
 }
 
-.projects a.project:hover {
+.projects .project:focus {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+}
+
+.projects .project:hover {
     transform: scale(1.03);
 }
 
-.projects a.project h2 {
+.projects .project h2 {
     margin: 0;
     font-weight: 300;
     font-size: 20px;
@@ -350,11 +353,10 @@ form ul {
     width: 200px;
 }
 
-.projects a.project p {
+.projects .project p {
     display: -webkit-box;
     font-size: 0.8em;
     height: 58px;
-    line-clamp: 3;
     margin: 0;
     overflow: hidden;
     padding: 0;
@@ -414,6 +416,7 @@ form ul {
     flex: 1 0 300px;
     flex-direction: column;
     overflow: auto;
+    position: relative;
 }
 
 .lists .list .list_head {
@@ -427,6 +430,16 @@ input.list-title-input {
     font-family: "Poppins", serif;
     margin: 10px;
     width: calc(100% - 20px);
+}
+
+.lists .list .list_control {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+
+.lists .list .list_control span {
+    padding: 3px;
 }
 
 .items {

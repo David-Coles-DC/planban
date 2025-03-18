@@ -1,7 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block content %}
+{% extends "base.html" %} {% load static %} {% block content %}
 <div class="main_content" id="projects">
     <div class="page-header">
         <h1>Projects</h1>
@@ -11,23 +8,28 @@
         </button>
     </div>
     <div class="projects">
-        <a href="#" class="project" id="new_project">
+        <a href="#" class="project" id="new_project" role="button">
             <h2>New Project</h2>
             <p>Create a new project</p>
         </a>
         {% for project in projects %}
-            <a class="project" href="{% url 'project' project.slug %}">
-                <h2>{{ project.title }}</h2>
-                <p>{{ project.short_description }}</p>
-                <span class="delete_project" onclick="confirmDelete('{{ project.id }}', '{{ project.title }}', event)" tabindex="0" aria-label="Delete the project '{{ project.title }}'" onkeydown="handleDeleteKeyEvent(event, '{{ project.id }}', '{{ project.title }}')">
-                    <i class="fa-solid fa-trash-can"></i>
-                </span>
-            </a>
+        <div class="project" onclick="location.href='/projects/{{ project.slug }}'" tabindex="0">
+            <h2>{{ project.title }}</h2>
+            <p>{{ project.short_description }}</p>
+            <span
+                class="delete_project"
+                onclick="confirmDelete('{{ project.id }}', '{{ project.title }}', event)"
+                tabindex="0"
+                aria-label="Delete the project '{{ project.title }}'"
+                onkeydown="handleDeleteKeyEvent(event, '{{ project.id }}', '{{ project.title }}')"
+            >
+                <i class="fa-solid fa-trash-can"></i>
+            </span>
+        </div>
         {% endfor %}
     </div>
-    {% if projects %}
-    {% else %}
-        <p>No projects found, please create a new project.</p>
+    {% if projects %} {% else %}
+    <p>No projects found, please create a new project.</p>
     {% endif %}
 </div>
 
@@ -50,7 +52,7 @@
             <div>
                 <div>
                     <input type="text" id="slug_text" value="/projects/" disabled>
-                    <input type="hidden" id="slug" name="slug" required>
+                    <input type="hidden" id="slug" name="slug">
                 </div>
             </div>
             <div>
