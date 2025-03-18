@@ -189,12 +189,15 @@ h2 span.logo {
     border: 1px solid #000000;
     border-radius: 10px;
     display: flex;
+    flex-wrap: wrap;
     overflow: hidden;
+    width: 148px;
 }
 
 .page-header > div:nth-of-type(2) div, .page-header > div:nth-of-type(2) a {
     border-right: 1px solid #eeeeee;
     color: #ffffff;
+    flex-grow: 1;
     padding: 10px;
     text-decoration: none;
 }
