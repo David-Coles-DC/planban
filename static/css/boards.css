@@ -424,12 +424,14 @@ form ul {
 }
 
 input.list-title-input {
-    background-color: transparent;
+    background-color: #d0d0d0;
     border: none;
     font-size: 1em;
     font-family: "Poppins", serif;
     margin: 10px;
+    position: relative;
     width: calc(100% - 20px);
+    z-index: 1;
 }
 
 .lists .list .list_control {
@@ -440,6 +442,14 @@ input.list-title-input {
 
 .lists .list .list_control span {
     padding: 3px;
+}
+
+.lists .list:first-child .move_left {
+    display: none;
+}
+
+.lists .list:nth-last-child(2) .move_right {
+    display: none;
 }
 
 .items {

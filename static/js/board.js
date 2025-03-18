@@ -143,50 +143,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.querySelectorAll('.list_head').forEach(function(listTitleElement) {
-        listTitleElement.addEventListener('click', function () {
-            const currentTitle = listTitleElement.innerText;
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.value = currentTitle;
-            input.classList.add('list-title-input');
-            listTitleElement.replaceWith(input);
-            input.focus();
-
-            input.addEventListener('blur', saveListTitle);
-            input.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    saveListTitle();
-                }
-            });
-
-            function saveListTitle() {
-                const newTitle = input.value;
-                listTitleElement.innerText = newTitle;
-                input.replaceWith(listTitleElement);
-
-                // Send the new title to the server
-                fetch(`/projects/update-list-title/${listTitleElement.dataset.listId}/`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken'),
-                    },
-                    body: JSON.stringify({ title: newTitle, listId: listTitleElement.dataset.listId }),
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (!data.success) {
-                            console.error('Failed to update list title', data);
-                        }
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                    });
-            }
-        });
-    });
-
     function moveListLeft(listId) {
         const listElement = document.querySelector(`.list[data-id="${listId}"]`);
         if (listElement) {
@@ -220,6 +176,63 @@ document.addEventListener('DOMContentLoaded', function () {
             moveListRight(this.dataset.listId);
         });
     });
+
+    document.querySelectorAll('.edit_title').forEach(button => {
+        button.addEventListener('click', function() {
+            const listId = this.dataset.listId;
+            editListTitle(listId);
+        });
+    });
+
+    document.querySelectorAll('.list_head').forEach(function(listTitleElement) {
+        listTitleElement.addEventListener('click', function () {
+            const listId = this.dataset.listId;
+            editListTitle(listId);
+        });
+    });
+
+    function editListTitle(listId) {
+        const listTitleElement = document.querySelector(`.list_head[data-list-id="${listId}"]`);
+        const currentTitle = listTitleElement.innerText;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentTitle;
+        input.classList.add('list-title-input');
+        listTitleElement.replaceWith(input);
+        input.focus();
+
+        input.addEventListener('blur', saveListTitle);
+        input.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                saveListTitle();
+            }
+        });
+
+        function saveListTitle() {
+            const newTitle = input.value;
+            listTitleElement.innerText = newTitle;
+            input.replaceWith(listTitleElement);
+
+            // Send the new title to the server
+            fetch(`/projects/update-list-title/${listId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: JSON.stringify({ title: newTitle, listId: listId }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (!data.success) {
+                        console.error('Failed to update list title', data);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    }
 
     addListForm.addEventListener('submit', function(event) {
         event.preventDefault();

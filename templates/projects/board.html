@@ -21,13 +21,13 @@
         <div class="list" data-id="{{ list.list.id }}">
             <div class="list_head drag_handle" data-list-id="{{ list.list.id }}">{{ list.list.title }}</div>
             <div class="list_control">
-                <span class="move_left button trans" {% if forloop.first %}style="display: none;"{% endif %} data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                <span class="move_left button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
                     <i class="fa-solid fa-arrow-left"></i>
                 </span>
-                <span class="move_right button trans" {% if forloop.last %}style="display: none;"{% endif %} data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                <span class="move_right button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
-                <span class="edit_title button trans" onclick="editListTitle('{{ list.list.id }}')" role="button" tabindex="0">
+                <span class="edit_title button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
                     <i class="fa-solid fa-pen"></i>
                 </span>
             </div>
