@@ -31,20 +31,20 @@
                     {% if not email.verified %}
                         <form method="post" action="{% url 'account_email' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="email" value="{{ email.email }}" />
+                            <input type="hidden" name="email" value="{{ email.email }}">
                             <button type="submit" name="action_send">Verify</button>
                         </form>
                     {% endif %}
                     {% if not email.primary %}
                         <form method="post" action="{% url 'account_email' %}">
                             {% csrf_token %}
-                            <input type="hidden" name="email" value="{{ email.email }}" />
+                            <input type="hidden" name="email" value="{{ email.email }}">
                             <button type="submit" name="action_primary">Set as Primary</button>
                         </form>
                     {% endif %}
                     <form method="post" action="{% url 'account_email' %}">
                         {% csrf_token %}
-                        <input type="hidden" name="email" value="{{ email.email }}" />
+                        <input type="hidden" name="email" value="{{ email.email }}">
                         <button type="submit" name="action_remove">Remove</button>
                     </form>
                 </td>

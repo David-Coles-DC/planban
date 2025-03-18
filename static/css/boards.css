@@ -107,6 +107,7 @@ h2 span.logo {
     border-radius: 5px;
     box-shadow: 2px 2px 5px #00000055;
     color: #000000;
+    display: none;
     position: absolute;
     right: 10px;
     text-align: left;
@@ -118,6 +119,7 @@ h2 span.logo {
 }
 
 .drop_down_menu.active {
+    display: block;
     transform: scaleY(1);
 }
 
@@ -367,8 +369,9 @@ form ul {
 }
 
 .projects a#new_project {
-    background-color: #cccccc;
+    background-color: #dddddd;
     border: 1px solid #999999;
+    color: #000000;
 }
 
 .projects a#new_project:after {

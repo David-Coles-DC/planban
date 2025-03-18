@@ -5,6 +5,13 @@ function toggleDropdown(dropDownId, event) {
     }
 }
 
+function handleMenuKeyDown(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        toggleDropdown('account-menu', event);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('click', function (event) {
         var hasDropdowns = document.querySelectorAll('.has_dropdown');

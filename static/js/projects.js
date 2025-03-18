@@ -69,11 +69,25 @@ function setupModal(modalId, buttonIds) {
 
             // Open the new modal
             modal.classList.add('open');
+
+            // Focus on the first input element in the modal
+            setTimeout(function () {
+                var firstInput = modal.querySelector('input:not([type="hidden"])');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+            }, 100); // Adjust the delay as needed
         };
     });
 
     span.onclick = function () {
         modal.classList.remove('open');
+    };
+
+    span.onkeydown = function (event) {
+        if (event.key === 'Enter') {
+            modal.classList.remove('open');
+        }
     };
 
     window.onclick = function (event) {
@@ -109,5 +123,12 @@ function confirmDelete(projectId, projectTitle, event) {
                 console.error('Error:', error);
                 alert('Failed to delete the project.');
             });
+    }
+}
+
+function handleDeleteKeyEvent(event, projectId, projectTitle) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        confirmDelete(projectId, projectTitle, event);
     }
 }

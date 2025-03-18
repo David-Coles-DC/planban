@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Planban - Organize your projects as a Kanban board or list." />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Planban - Organize your projects as a Kanban board or list.">
         <title>Planban Home</title>
         <script type="text/javascript" src="{% static 'js/skrollr.min.js' %}" defer></script>
-        <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}" />
-        <meta name="apple-mobile-web-app-title" content="Planban" />
-        <link rel="manifest" href="{% static 'images/site.webmanifest' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+        <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+        <meta name="apple-mobile-web-app-title" content="Planban">
+        <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
         <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous" rel="preconnect"></script>
         {% if is_logged_in %}
         <script>
@@ -86,7 +86,7 @@
             </div>
         </section>
         <header>
-            <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" width="210" />
+            <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" width="210/>
             <nav class="desktop">
                 <ul>
                     <li>
@@ -140,10 +140,10 @@
                         <a href="#contact">Contact Us</a>
                     </li>
                     <li>
-                        <a href="{% url 'account_login' %}" id="loginButton">Login</a>
+                        <a href="{% url 'account_login' %}" id="loginButtonMobile">Login</a>
                     </li>
                     <li>
-                        <a href="/accounts/signup/" id="signupButton">Get Started</a>
+                        <a href="/accounts/signup/" id="signupButtonMobile">Get Started</a>
                     </li>
                 </ul>
             </nav>
@@ -222,9 +222,9 @@
                         <h3 class="faq-question">Can I drag and drop lists or items?</h3>
                         <div class="faq-answer">
                             <p>
-                                Yes, you can easily drag and drop lists or items within your Kanban boards. This allows you to
-                                quickly reorganize your tasks and prioritize them as needed. Simply click and hold on the item
-                                or list you want to move, and drag it to the desired position.
+                                Yes, you can easily drag and drop lists or items within your Kanban boards. This allows
+                                you to quickly reorganize your tasks and prioritize them as needed. Simply click and
+                                hold on the item or list you want to move, and drag it to the desired position.
                             </p>
                         </div>
                     </div>
@@ -250,7 +250,7 @@
         <footer>
             <div class="footer_inner">
                 <div class="footer_column">
-                    <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" width="210" />
+                    <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" width="210">
                 </div>
                 <div class="footer_column">&copy; {% now "Y" %} Planban. All rights reserved.</div>
                 <div class="footer_column">
@@ -272,7 +272,7 @@
         <!-- Login Modal HTML -->
         <div id="loginModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" tabindex="0">&times;</span>
                 <h2>
                     <span class="logo" aria-hidden></span>
                     Login
@@ -300,15 +300,14 @@
                                 name="password"
                                 placeholder="Password"
                                 autocomplete="current-password"
-                                required=""
-                                aria-describedby="id_password_helptext"
+                                required
                                 id="id_password"
                             />
                         </div>
                     </div>
                     <div>
                         <label for="id_remember">Remember Me:</label>
-                        <input type="checkbox" name="remember" id="id_remember" />
+                        <input type="checkbox" name="remember" id="id_remember">
                     </div>
                     <button class="button" type="submit">Login</button>
                 </form>
@@ -320,7 +319,7 @@
         <!-- Signup Modal HTML -->
         <div id="signupModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close" tabindex="0">&times;</span>
                 <h2>
                     <span class="logo" aria-hidden></span>
                     Sign up
@@ -363,14 +362,14 @@
                                 name="password1"
                                 placeholder="Password"
                                 autocomplete="new-password"
-                                required=""
-                                aria-describedby="id_password1_helptext"
+                                required
+                                aria-describedby="password_helptext"
                                 id="id_password1"
                             />
                             <span class="helptext" id="id_password1_helptext"></span>
                         </div>
                     </div>
-                    <div>
+                    <div id="password_helptext">
                         <ul>
                             <li>Your password can’t be too similar to your other personal information.</li>
                             <li>Your password must contain at least 8 characters.</li>
@@ -386,7 +385,8 @@
                                 name="password2"
                                 placeholder="Password (again)"
                                 autocomplete="new-password"
-                                required=""
+                                required
+                                aria-describedby="password_helptext"
                                 id="id_password2"
                             />
                         </div>
@@ -450,11 +450,25 @@
 
                         // Open the new modal
                         modal.classList.add('open');
+
+                        // Focus on the first input element in the modal
+                        setTimeout(function () {
+                            var firstInput = modal.querySelector('input:not([type="hidden"])');
+                            if (firstInput) {
+                                firstInput.focus();
+                            }
+                        }, 100); // Adjust the delay as needed
                     };
                 });
 
                 span.onclick = function () {
                     modal.classList.remove('open');
+                };
+
+                span.onkeydown = function (event) {
+                    if (event.key === 'Enter') {
+                        modal.classList.remove('open');
+                    }
                 };
 
                 window.onclick = function (event) {
@@ -465,8 +479,8 @@
             }
 
             // Setup modals
-            setupModal('loginModal', ['loginButton', 'signupToLogin']);
-            setupModal('signupModal', ['faqSignupButton', 'introSignupButton', 'signupButton', 'registerToLogin']);
+            setupModal('loginModal', ['loginButton', 'loginButtonMobile', 'signupToLogin']);
+            setupModal('signupModal', ['faqSignupButton', 'introSignupButton', 'signupButton', 'signupButtonMobile', 'registerToLogin']);
 
             // FAQ Accordion JavaScript
             document.querySelectorAll('.faq-question').forEach((question) => {

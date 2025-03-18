@@ -8,18 +8,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Planban - Organize your projects as a Kanban board or list.">
         <title>{% block title %}Planban{% endblock %}</title>
         <script type="text/javascript" src="{% static 'js/skrollr.min.js' %}" defer></script>
-        <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}" />
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}" />
-        <meta name="apple-mobile-web-app-title" content="Planban" />
-        <link rel="manifest" href="{% static 'images/site.webmanifest' %}" />
-        <link rel="stylesheet" type="text/css" href="{% static 'css/boards.css' %}" />
+        <link rel="icon" type="image/png" href="{% static 'images/favicon-96x96.png' %}" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+        <meta name="apple-mobile-web-app-title" content="Planban">
+        <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/boards.css' %}">
         <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous" rel="preconnect"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
         <script src="{% static 'js/base.js' %}" defer></script>
@@ -32,9 +33,9 @@
         {% else %}
         <header>
             <a href="{% url 'projects_index' %}">
-                <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="22" />
+                <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="22">
             </a>
-            <div class="has_dropdown" id="account-menu-button" onclick="toggleDropdown('account-menu', event)" aria-label="Account Menu">
+            <div class="has_dropdown" id="account-menu-button" onclick="toggleDropdown('account-menu', event)" onkeydown="handleMenuKeyDown(event)" aria-label="Account Menu" tabindex="0">
                 <span> {{ user|user_initials }} </span>
                 <div class="drop_down_menu" id="account-menu">
                     <h6 class="account_title">Account</h6>
@@ -67,7 +68,7 @@
         <footer>
             <div class="footer_inner">
                 <div class="footer_column">
-                    <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35" />
+                    <img alt="Planban Logo" src="{% static 'images/logo.webp' %}" height="35">
                 </div>
                 <div class="footer_column">&copy; {% now "Y" %} Planban. All rights reserved.</div>
                 <div class="footer_column">
