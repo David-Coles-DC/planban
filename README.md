@@ -2,20 +2,11 @@
 
 **Planban** is a feature-rich **Kanban board** and **Gantt chart** project management tool, designed for efficiency, accessibility, and responsiveness. Built using **Django (Python) for the backend**, a **PostgreSQL database**, and **HTML, CSS, and JavaScript** for the frontend, Planban helps users manage tasks seamlessly.
 
-## 🚀 Features
-- **Kanban Board**: Create, edit, and organise tasks visually.
-- **Gantt Chart View**: Convert your Kanban board into a timeline-based view.
-- **User Authentication**: Secure sign-up, login, and password management.
-- **Task Collaboration**: Add comments and tag users on tasks.
-- **Dark Mode**: Toggle between light and dark themes.
-- **Fully Responsive**: Works across all devices.
-- **Accessibility First**: Keyboard navigation, screen reader support, and high-contrast UI.
-
-## 🛠️ Tech Stack
+## 🖥️ Tech Stack
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Python, Django
 - **Database**: PostgreSQL
-- **Authentication**: Django Authentication System
+- **Authentication**: Django AllAuth
 
 ## 📅 Planning
 
@@ -31,7 +22,7 @@ The site is currently deployed on Heroku and can be accessed via the following U
 
 ![Planban Screenshot](https://github.com/user-attachments/assets/9681aa90-02c1-4b2f-97ee-520de0e79c6c)
 
-## 📦 Installation
+## 📦 Manual Installation
 ### **1️⃣ Clone the Repository**
 ```sh
 git clone https://github.com/David-Coles-DC/planban
@@ -67,7 +58,7 @@ Planban follows **WCAG 2.1 AA guidelines**, including:
 - High **colour contrast** and resizable text.
 - Mobile-friendly and touch-accessible UI.
 
-## Features
+## 🛠️ Features
 
 #### HOME PAGE
 The home page is purely to tell you about Planban, I've used Skrollr to add some visual animation to the page which I have disabled on mobile to stop any issues. If you are logged in then the home page will automatically direct you into the projects page, there is no other reason to see the home page if you are logged in.
@@ -119,7 +110,7 @@ This would be highly beneficial when planning projects, I had added date fields 
 #### PROJECT COLLABORATION
 Adding the ability to invite other users to be able to contribute to projects would also be highly beneficial to the app.
 
-## User Experience
+## 🎨 User Experience
 ### Design
 #### FONTS
 The font I chose to use was 'Poppins' which I used from Google Fonts, it's a sans-serif font that is easy to read and pleasing to look at.
@@ -135,7 +126,7 @@ Tertiary Colour - #EC8305
 
 I put these colours together by using the external resource [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3). The link is a link to the actual colours that I used.
 
-## Project Planning
+## 🗂️ Project Planning
 ### User Stories
 
 ### Wireframes
@@ -162,7 +153,7 @@ This table holds all of the items for each list and has a foreign key back to th
 
 This table was created to be able to run the Gannt charts, however this never came to fruition, but it was there to creation a relationship between an item and those other items that it depended on.
 
-## Testing
+## 🧪 Testing
 
 ### Manual Testing
 
@@ -172,7 +163,9 @@ This table was created to be able to run the Gannt charts, however this never ca
 
 ### Automated Testing
 
-## AI
+In the end I did not incorporate any automated testing into the project due to time limitations, however I do see the importance of automated testing as I do think that in a production project it should definitely be included.
+
+## 🤖 AI
 
 I used AI thoughout the creation of the project, for most of the code creation and functionality as well as fixing any issues that I came across.
 
@@ -182,7 +175,7 @@ Each time I wanted a new piece of functionality I would first consult Copilot, i
 #### ERROR DEBUGGING
 When I had an issue with my project I would first consult Copilot, 90% of the time it could sort out the issue for me, however the other 10% of the time it had difficulty, I had to keep altering my prompts to be more specific which helped, but on the odd occassion I would have to revery to going back to Google to search for the issue.
 
-## Bugs
+## 🐛 Bugs
 Any bugs that I found were fixed as and when I found them, however this doesn't mean that the project is bug free and I'm sure there are things that could occur that would break the app, however I am unaware of any of these at the time that this readme was created.
 
 ## 📚 Resources
