@@ -165,6 +165,13 @@ This table was created to be able to run the Gannt charts, however this never ca
 
 ### Manual Testing
 
+|Page|Feature|Action|Effect|Passed|
+|---|---|---|---|---|
+|Homepage|Site Logo|Click|Redirects to home page from all pages|✅|
+|Projects Page|Site Logo|Click|Redirects to home page from all pages|✅|
+|Kanban View|Site Logo|Click|Redirects to home page from all pages|✅|
+|Table View|Site Logo|Click|Redirects to home page from all pages|✅|
+
 #### LIGHTHOUSE TESTS
 
 ![image](https://github.com/user-attachments/assets/0a84c95a-3ea7-4137-8839-eb3976c4d33c)
