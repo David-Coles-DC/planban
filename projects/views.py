@@ -18,67 +18,66 @@ def index(request):
 
 
 @login_required
+@require_POST
+# The create_project function is used to create a new project
+# and makes sure it belongs to the current user
 def create_project(request):
-    if request.method == 'POST':
-        form = ProjectForm(request.POST)
-        if form.is_valid():
-            try:
-                project = form.save(commit=False)
-                project.owner = request.user
-                project.save()
+    form = ProjectForm(request.POST)
+    if form.is_valid():
+        try:
+            project = form.save(commit=False)
+            project.owner = request.user
+            project.save()
 
-                # Create the default lists
-                List.objects.create(
-                    project=project,
-                    title='To Do',
-                    position=0
-                )
-                List.objects.create(
-                    project=project,
-                    title='In Progress',
-                    position=1
-                )
-                List.objects.create(
-                    project=project,
-                    title='Done',
-                    position=2
-                )
+            # Create the default lists
+            List.objects.create(
+                project=project,
+                title='To Do',
+                position=0
+            )
+            List.objects.create(
+                project=project,
+                title='In Progress',
+                position=1
+            )
+            List.objects.create(
+                project=project,
+                title='Done',
+                position=2
+            )
 
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    "Your project was created successfully"
-                )
-
-                return JsonResponse({'success': True, 'slug': project.slug})
-            except IntegrityError:
-                form.add_error(
-                    'slug',
-                    'Project with this Slug already exists.'
-                )
-                return JsonResponse(
-                    {
-                        'success': False,
-                        'error': 'Project with this Slug already exists.'
-                    }
-                )
-        else:
-            errors = form.errors.as_json()
             messages.add_message(
                 request,
-                messages.ERROR,
-                "An error occured while trying to create a project"
+                messages.SUCCESS,
+                "Your project was created successfully"
             )
-            return JsonResponse({'success': False, 'errors': errors})
-    messages.add_message(
-        request,
-        messages.ERROR,
-        "Invalid Request"
-    )
-    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+            return JsonResponse({'success': True, 'slug': project.slug})
+        except IntegrityError:
+            form.add_error(
+                'slug',
+                'Project with this Slug already exists.'
+            )
+            return JsonResponse(
+                {
+                    'success': False,
+                    'error': 'Project with this Slug already exists.'
+                }
+            )
+    else:
+        errors = form.errors.as_json()
+        messages.add_message(
+            request,
+            messages.ERROR,
+            "An error occured while trying to create a project"
+        )
+        return JsonResponse({'success': False, 'errors': errors})
 
 
 @login_required
+# The project function is used to display the project board
+# It fetches the project with the slug from the database
+# and makes sure it belongs to the current user
 def project(request, slug):
     project = Project.objects.get(slug=slug, owner=request.user)
     lists = List.objects.filter(project=project).order_by('position')
@@ -100,6 +99,9 @@ def project(request, slug):
 
 
 @login_required
+# The project_table function is used to display the project table
+# It fetches the project with the slug from the database
+# and makes sure it belongs to the current user
 def project_table(request, slug):
     project = Project.objects.get(slug=slug, owner=request.user)
     lists = List.objects.filter(project=project).order_by('position')
@@ -121,6 +123,10 @@ def project_table(request, slug):
 
 
 @login_required
+# The delete_project function is used to delete a project
+# It uses the project id to fetch the project from the database
+# and then deletes the project
+# and makes sure it belongs to the current user
 def delete_project(request, id):
     if request.method == 'POST':
         project = get_object_or_404(Project, id=id, owner=request.user)
@@ -143,6 +149,9 @@ def delete_project(request, id):
 
 @require_POST
 @login_required
+# The update_project_title function is used to update the title of a project
+# It uses the project id to fetch the project from the database
+# and makes sure it belongs to the current user
 def update_project_title(request, id):
     project = get_object_or_404(Project, id=id, owner=request.user)
     data = json.loads(request.body)
@@ -185,6 +194,9 @@ def update_project_title(request, id):
 
 @require_POST
 @login_required
+# The update_list_title function is used to update the title of a list
+# It uses the list id to fetch the list from the database
+# and makes sure it belongs to the current user
 def update_list_title(request, id):
     list = get_object_or_404(List, id=id, project__owner=request.user)
     data = json.loads(request.body)
@@ -212,6 +224,8 @@ def update_list_title(request, id):
 
 @require_POST
 @login_required
+# The add_list function is used to add a new list to a project
+# and makes sure it belongs to the current user
 def add_list(request):
     title = request.POST.get('listTitle')
     project_id = request.POST.get('projectId')
@@ -244,6 +258,9 @@ def add_list(request):
 
 @login_required
 @require_http_methods(['DELETE'])
+# The delete_list function is used to delete a list
+# It uses the list id to fetch the list from the database
+# and makes sure it belongs to the current user
 def delete_list(request, id):
     if request.method in ['DELETE']:
         list_obj = get_object_or_404(List, id=id, project__owner=request.user)
@@ -254,16 +271,23 @@ def delete_list(request, id):
 
 @require_POST
 @login_required
+# The update_list_order function is used to update the order of lists
+# and makes sure it belongs to the current user
 def update_list_order(request):
     data = json.loads(request.body)
     order = data.get('order', [])
     for index, list_id in enumerate(order):
-        List.objects.filter(id=list_id).update(position=index)
+        List.objects.filter(
+            id=list_id,
+            project__owner=request.user
+        ).update(position=index)
     return JsonResponse({'success': True})
 
 
 @require_POST
 @login_required
+# The update_item_order function is used to update the order of items
+# and makes sure they belongs to the current user
 def update_item_order(request):
     try:
         data = json.loads(request.body)
@@ -300,6 +324,10 @@ def update_item_order(request):
 
 @require_POST
 @login_required
+# The save_item function is used to save an item
+# It uses the item id to fetch the item from the database and updates it
+# If the item id is not provided, a new item is created
+# both will make sure it belongs to the current user
 def save_item(request):
     title = request.POST.get('itemTitle')
     description = request.POST.get('itemDescription', '')
@@ -351,6 +379,9 @@ def save_item(request):
 
 @login_required
 @require_http_methods(['DELETE'])
+# The delete_item function is used to delete an item
+# It uses the item id to fetch the item from the database
+# and makes sure it belongs to the current user
 def delete_item(request, id):
     try:
         item = get_object_or_404(

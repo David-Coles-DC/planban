@@ -6,10 +6,3 @@ def home(request):
         'is_logged_in': request.user.is_authenticated,
     }
     return render(request, 'home/index.html', context)
-
-
-def test(request):
-    context = {
-        'is_logged_in': request.user.is_authenticated,
-    }
-    return render(request, 'home/test.html', context)

@@ -129,6 +129,16 @@ Before creating the projects I set up user stories via GitHub Projects, the boar
 
 ### Wireframes
 
+![image](https://github.com/user-attachments/assets/87db878d-61e9-4ae9-93da-91a4742954c5)
+
+The above is a wireframe for the desktop, my aim was to make sure that the whole project page fitted within the browser window, and the project lists would change in height and if there were many lists then they could be scrolled horizontally without losing the header or footer.
+
+![image](https://github.com/user-attachments/assets/593c49f5-24a8-4bbd-b96d-413c98041182)
+
+For the mobile view the above theory would also take place, it would fit into the screen width and you could scroll the lists section horizontally with touch support.
+
+I managed to create the design that I intended from the wireframes, however I did also create a home page for people to find out about Planban and I also added a list view which didn't originally exist on the wireframes.
+
 ### Data Models
 
 ![image](https://github.com/user-attachments/assets/59bd0ce6-458d-4d48-a1e2-50b803c1a97d)
@@ -177,10 +187,10 @@ In the end I did not incorporate any automated testing into the project due to t
 
 ## 🤖 AI
 
-I used AI thoughout the creation of the project, for most of the code creation and functionality as well as fixing any issues that I came across.
+I used AI thoughout the creation of the project, for most of the code creation and functionality as well as fixing any issues that I came across. Overall I used Copilot mostly to speed up the development process.
 
 #### CODE CREATION
-Each time I wanted a new piece of functionality I would first consult Copilot, it would produce the code for me but I would only implement the code that I saw would be beneficial to the project, sometimes it would produce code that was incorrect for the context it was to be used in, but overall it was very helpful.
+Each time I wanted a new piece of functionality I would first consult Copilot, it would produce the code for me but I would only implement the code that I saw would be beneficial to the project, sometimes it would produce code that was incorrect for the context it was to be used in or overly complex, but overall it was very helpful.
 
 #### ERROR DEBUGGING
 When I had an issue with my project I would first consult Copilot, 90% of the time it could sort out the issue for me, however the other 10% of the time it had difficulty, I had to keep altering my prompts to be more specific which helped, but on the odd occassion I would have to revery to going back to Google to search for the issue.
