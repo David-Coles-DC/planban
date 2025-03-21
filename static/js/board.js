@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
         animation: 150,
         handle: '.drag_handle',
         onEnd: function (e) {
-            var order = sortable.toArray();
+            var order = sortable.toArray().filter(id => {
+                var element = document.querySelector(`[data-id="${id}"]`);
+                return element && !element.classList.contains('add_list');
+            });
             updateListOrder(order);
         },
         dataIdAttr: 'data-id',
@@ -50,9 +53,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    console.log('Order updated successfully');
+                    showCToast("success", "list order updated successfully")
                 } else {
-                    console.error('Failed to update order');
+                    showCToast("error", "list order failed to update successfully")
                 }
             });
     }
@@ -87,9 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    console.log('Item order updated successfully');
+                    showCToast("success", "item order updated successfully")
                 } else {
-                    console.error('Failed to update item order', data);
+                    showCToast("error", "item order failed to update successfully")
                 }
             });
     }
@@ -131,14 +134,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
+                        showCToast("success", "project title updated successfully");
                         const newUrl = `/projects/${slug}/`;
                         history.pushState(null, '', newUrl);
                     } else {
-                        console.error('Failed to update title', data);
+                        showCToast("error", "Failed to update title");
                     }
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    showCToast("error", "Failed to update title");
                 });
         }
     });
@@ -149,7 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const previousElement = listElement.previousElementSibling;
             if (previousElement && previousElement.classList.contains('list')) {
                 listsContainer.insertBefore(listElement, previousElement);
-                updateListOrder(Array.from(listsContainer.children).map(list => list.dataset.id));
+                updateListOrder(Array.from(listsContainer.children)
+                    .filter(list => !list.classList.contains('add_list'))
+                    .map(list => list.dataset.id));
             }
         }
     }
@@ -160,7 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const nextElement = listElement.nextElementSibling;
             if (nextElement && nextElement.classList.contains('list')) {
                 listsContainer.insertBefore(nextElement, listElement);
-                updateListOrder(Array.from(listsContainer.children).map(list => list.dataset.id));
+                updateListOrder(Array.from(listsContainer.children)
+                    .filter(list => !list.classList.contains('add_list'))
+                    .map(list => list.dataset.id));
             }
         }
     }
@@ -295,12 +303,14 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    if (!data.success) {
-                        console.error('Failed to update list title', data);
+                    if (data.success) {
+                        showCToast("success", "list title updated successfully");
+                    } else {
+                        showCToast("error", "Failed to update list title");
                     }
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    showCToast("error", "Failed to update list title");
                 });
         }
     }
@@ -326,6 +336,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listHead = document.createElement('div');
                 listHead.classList.add('list_head', 'drag_handle');
                 listHead.textContent = newList.title;
+                listHead.setAttribute('data-list-id', newList.id);
+                listHead.onclick = function() {
+                    editListTitle(this.dataset.listId);
+                };
 
                 const itemsContainer = document.createElement('div');
                 itemsContainer.classList.add('items');
@@ -345,6 +359,77 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 listFooter.appendChild(addItemButton);
 
+                // Add delete button to listFooter
+                const deleteListButton = document.createElement('button');
+                deleteListButton.classList.add('delete_list', 'button', 'trans');
+                deleteListButton.setAttribute('aria-label', 'Delete list');
+                deleteListButton.setAttribute('onclick', `confirmDeleteList('${newList.id}')`);
+        
+                const deleteListIcon = document.createElement('i');
+                deleteListIcon.classList.add('fa-solid', 'fa-trash-can');
+                deleteListIcon.setAttribute('aria-hidden', 'true');
+                deleteListButton.appendChild(deleteListIcon);
+        
+                listFooter.appendChild(deleteListButton);
+
+                // Create list control container
+                const listControl = document.createElement('div');
+                listControl.classList.add('list_control');
+    
+                // Create move left button
+                const moveLeftButton = document.createElement('span');
+                moveLeftButton.classList.add('move_left', 'button', 'trans');
+                moveLeftButton.setAttribute('data-list-id', newList.id);
+                moveLeftButton.setAttribute('role', 'button');
+                moveLeftButton.setAttribute('tabindex', '0');
+                moveLeftButton.onclick = function(event) {
+                    event.stopPropagation();
+                    moveListLeft(this.dataset.listId);
+                };
+    
+                const moveLeftIcon = document.createElement('i');
+                moveLeftIcon.classList.add('fa-solid', 'fa-arrow-left');
+                moveLeftIcon.setAttribute('aria-hidden', 'true');
+                moveLeftButton.appendChild(moveLeftIcon);
+    
+                listControl.appendChild(moveLeftButton);
+    
+                // Create move right button
+                const moveRightButton = document.createElement('span');
+                moveRightButton.classList.add('move_right', 'button', 'trans');
+                moveRightButton.setAttribute('data-list-id', newList.id);
+                moveRightButton.setAttribute('role', 'button');
+                moveRightButton.setAttribute('tabindex', '0');
+                moveRightButton.onclick = function(event) {
+                    event.stopPropagation();
+                    moveListRight(this.dataset.listId);
+                };
+    
+                const moveRightIcon = document.createElement('i');
+                moveRightIcon.classList.add('fa-solid', 'fa-arrow-right');
+                moveRightIcon.setAttribute('aria-hidden', 'true');
+                moveRightButton.appendChild(moveRightIcon);
+    
+                listControl.appendChild(moveRightButton);
+    
+                // Create edit title button
+                const editTitleButton = document.createElement('span');
+                editTitleButton.classList.add('edit_title', 'button', 'trans');
+                editTitleButton.setAttribute('data-list-id', newList.id);
+                editTitleButton.setAttribute('role', 'button');
+                editTitleButton.setAttribute('tabindex', '0');
+                editTitleButton.onclick = function(event) {
+                    editListTitle(this.dataset.listId);
+                };
+    
+                const editTitleIcon = document.createElement('i');
+                editTitleIcon.classList.add('fa-solid', 'fa-pen');
+                editTitleIcon.setAttribute('aria-hidden', 'true');
+                editTitleButton.appendChild(editTitleIcon);
+    
+                listControl.appendChild(editTitleButton);
+
+                newListElement.appendChild(listControl);
                 newListElement.appendChild(listHead);
                 newListElement.appendChild(itemsContainer);
                 newListElement.appendChild(listFooter);
@@ -354,8 +439,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 addListForm.reset();
                 addListForm.style.display = 'none';
                 addListButton.style.display = 'block';
+
+                showCToast("success", "list added successfully");
             } else {
-                console.error('Failed to add list', data.error);
+                showCToast("error", "Failed to add list");
             }
         })
         .catch(error => console.error('Error:', error));
@@ -379,9 +466,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listElement = document.querySelector(`.list[data-id="${listId}"] .items`);
                 if (formData.get('itemId')) {
                     const itemElement = document.querySelector(`.item[data-id="${formData.get('itemId')}"]`);
-                    itemElement.textContent = data.item.title;
+                    const textNode = Array.from(itemElement.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                        textNode.textContent = data.item.title;
+                    } else {
+                        itemElement.textContent = data.item.title;
+                    }
                     itemElement.setAttribute('data-title', data.item.title);
                     itemElement.setAttribute('data-description', data.item.description);
+                    showCToast("success", "item updated successfully");
                 } else {
                     const newItem = document.createElement('div');
                     newItem.classList.add('item');
@@ -389,7 +482,55 @@ document.addEventListener('DOMContentLoaded', function () {
                     newItem.setAttribute('data-title', data.item.title);
                     newItem.setAttribute('data-description', data.item.description);
                     newItem.textContent = data.item.title;
+
+                    // Add onclick event to newItem
+                    newItem.onclick = function() {
+                        openEditItemModal(this);
+                    };
+
+                    // Create item control container
+                    const itemControl = document.createElement('div');
+                    itemControl.classList.add('item_control');
+    
+                    // Create move up button
+                    const moveUpButton = document.createElement('span');
+                    moveUpButton.classList.add('move_up', 'button', 'trans');
+                    moveUpButton.setAttribute('data-item-id', data.item.id);
+                    moveUpButton.setAttribute('role', 'button');
+                    moveUpButton.onclick = function(event) {
+                        event.stopPropagation();
+                        moveItemUp(this.dataset.itemId);
+                    };
+
+                    // Create and append the icon to the move up button
+                    const moveUpIcon = document.createElement('i');
+                    moveUpIcon.classList.add('fa-solid', 'fa-arrow-up');
+                    moveUpIcon.setAttribute('aria-hidden', 'true');
+                    moveUpButton.appendChild(moveUpIcon);
+
+                    itemControl.appendChild(moveUpButton);
+    
+                    // Create move down button
+                    const moveDownButton = document.createElement('span');
+                    moveDownButton.classList.add('move_down', 'button', 'trans');
+                    moveDownButton.setAttribute('data-item-id', data.item.id);
+                    moveDownButton.setAttribute('role', 'button');
+                    moveDownButton.onclick = function(event) {
+                        event.stopPropagation();
+                        moveItemDown(this.dataset.itemId);
+                    };
+
+                    // Create and append the icon to the move down button
+                    const moveDownIcon = document.createElement('i');
+                    moveDownIcon.classList.add('fa-solid', 'fa-arrow-down');
+                    moveDownIcon.setAttribute('aria-hidden', 'true');
+                    moveDownButton.appendChild(moveDownIcon);
+
+                    itemControl.appendChild(moveDownButton);
+    
+                    newItem.appendChild(itemControl);
                     listElement.appendChild(newItem);
+                    showCToast("success", "item added successfully");
                 }
                 editItemModal.classList.remove('open');
                 editItemForm.reset();
@@ -401,21 +542,25 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => console.error('Error:', error));
     });
 
+    function openEditItemModal(itemElement) {
+        const itemIdValue = itemElement.getAttribute('data-id');
+        const itemTitleValue = itemElement.getAttribute('data-title');
+        const itemDescriptionValue = itemElement.getAttribute('data-description');
+    
+        itemTitle.value = itemTitleValue;
+        itemDescription.value = itemDescriptionValue;
+        itemIdInput.value = itemIdValue;
+        listIdInput.value = itemElement.closest('.list').getAttribute('data-id');
+    
+        modalTitle.textContent = 'Edit Item';
+        submitButton.textContent = 'Edit Item';
+        deleteItemButton.style.display = 'block';
+        editItemModal.classList.add('open');
+    }
+
     document.querySelectorAll('.item').forEach(item => {
         item.addEventListener('click', function() {
-            const itemIdValue = this.getAttribute('data-id');
-            const itemTitleValue = this.getAttribute('data-title');
-            const itemDescriptionValue = this.getAttribute('data-description');
-
-            itemTitle.value = itemTitleValue;
-            itemDescription.value = itemDescriptionValue;
-            itemIdInput.value = itemIdValue;
-            listIdInput.value = this.closest('.list').getAttribute('data-id');
-
-            modalTitle.textContent = 'Edit Item';
-            submitButton.textContent = 'Edit Item';
-            deleteItemButton.style.display = 'block';
-            editItemModal.classList.add('open');
+            openEditItemModal(this);
         });
     });
 
@@ -453,13 +598,13 @@ document.addEventListener('DOMContentLoaded', function () {
                         editItemModal.classList.remove('open');
                         editItemForm.reset();
                         deleteItemButton.style.display = 'none';
+                        showCToast("success", "item deleted successfully");
                     } else {
-                        alert('Failed to delete the item.');
+                        showCToast("error", "An error occurred while deleting the item");
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while deleting the item.');
+                    showCToast("error", "An error occurred while deleting the item");
                 });
             }
         }
@@ -495,13 +640,13 @@ function confirmDeleteList(listId) {
                 // Remove the list from the DOM
                 const listElement = document.querySelector(`.list[data-id="${listId}"]`);
                 listElement.remove();
+                showCToast("success", "list deleted successfully");
             } else {
-                alert('Failed to delete the list.');
+                showCToast("error", "Failed to delete the list");
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while deleting the list.');
+            showCToast("error", "An error occurred while deleting the list");
         });
     }
 }

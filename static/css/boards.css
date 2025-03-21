@@ -586,3 +586,9 @@ footer .social_media a:hover {
     color: var(--color-tertiary);
     text-decoration: none;
 }
+
+.account_manage {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}

@@ -154,13 +154,6 @@ def update_project_title(request, id):
                 project.title = new_title
                 project.slug = new_slug
                 project.save()
-
-                messages.add_message(
-                    request,
-                    messages.SUCCESS,
-                    "Your project title was updated successfully"
-                )
-
                 return JsonResponse(
                     {
                         'success': True,
@@ -168,23 +161,12 @@ def update_project_title(request, id):
                     }
                 )
             except IntegrityError:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    "Please create a unique title"
-                )
-
                 return JsonResponse(
                     {
                         'success': False,
                         'error': 'Project with this Slug already exists.'
                     }
                 )
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "Please add a project slug"
-        )
         return JsonResponse(
             {
                 'success': False,
@@ -192,11 +174,6 @@ def update_project_title(request, id):
             },
             status=400
         )
-    messages.add_message(
-        request,
-        messages.ERROR,
-        "Please add a project title"
-    )
     return JsonResponse(
         {
             'success': False,
@@ -216,31 +193,14 @@ def update_list_title(request, id):
         try:
             list.title = new_title
             list.save()
-
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Your list title was updated successfully"
-            )
-
             return JsonResponse({'success': True})
         except IntegrityError:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                "Please use a unique list title"
-            )
             return JsonResponse(
                 {
                     'success': False,
                     'error': 'List with this title already exists.'
                 }
             )
-    messages.add_message(
-        request,
-        messages.ERROR,
-        "List title cannot be blank"
-    )
     return JsonResponse(
         {
             'success': False,
@@ -269,12 +229,6 @@ def add_list(request):
             position=position
         )
 
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            "Your list was added successfully"
-        )
-
         return JsonResponse(
             {
                 'success': True,
@@ -285,11 +239,6 @@ def add_list(request):
             }
         )
     except Project.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The project you were tring to add the list to does not exist"
-        )
         return JsonResponse({'success': False, 'error': 'Project not found'})
 
 
@@ -299,20 +248,7 @@ def delete_list(request, id):
     if request.method in ['DELETE']:
         list_obj = get_object_or_404(List, id=id, project__owner=request.user)
         list_obj.delete()
-
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            "Your list was deleted successfully"
-        )
-
         return JsonResponse({'success': True})
-
-    messages.add_message(
-        request,
-        messages.ERROR,
-        "Invalid request"
-    )
     return JsonResponse({'success': False}, status=400)
 
 
@@ -323,13 +259,6 @@ def update_list_order(request):
     order = data.get('order', [])
     for index, list_id in enumerate(order):
         List.objects.filter(id=list_id).update(position=index)
-
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            "Your list order was altered successfully"
-        )
-
     return JsonResponse({'success': True})
 
 
@@ -354,40 +283,18 @@ def update_item_order(request):
             item.list = new_list
             item.position = index
             item.save()
-
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            "Your item order was altered successfully"
-        )
-
         return JsonResponse({'success': True})
     except List.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The list you were trying to update does not exist"
-        )
         return JsonResponse(
             {'success': False, 'error': 'List not found'},
             status=404
         )
     except Item.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The item you were trying to update does not exist"
-        )
         return JsonResponse(
             {'success': False, 'error': 'Item not found'},
             status=404
         )
     except Exception as e:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "An error occured while trying to update the item order"
-        )
         return JsonResponse({'success': False, 'error': str(e)}, status=400)
 
 
@@ -411,12 +318,6 @@ def save_item(request):
             item.title = title
             item.description = description
             item.save()
-
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Your item was updated successfully"
-            )
         else:
             # Create new item
             item = Item.objects.create(
@@ -425,13 +326,6 @@ def save_item(request):
                 list=list_obj,
                 position=list_obj.items.count()
             )
-
-            messages.add_message(
-                request,
-                messages.SUCCESS,
-                "Your item was added successfully"
-            )
-
         return JsonResponse({
             'success': True,
             'item': {
@@ -442,21 +336,11 @@ def save_item(request):
             }
         })
     except List.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The list you were trying to update does not exist"
-        )
         return JsonResponse(
             {'success': False, 'error': 'List not found'},
             status=404
         )
     except Item.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The item you were trying to update does not exist"
-        )
         return JsonResponse(
             {'success': False, 'error': 'Item not found'},
             status=404
@@ -475,28 +359,11 @@ def delete_item(request, id):
             list__project__owner=request.user
         )
         item.delete()
-
-        messages.add_message(
-            request,
-            messages.SUCCESS,
-            "Your item was deleted successfully"
-        )
-
         return JsonResponse({'success': True})
     except Item.DoesNotExist:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "The item you were trying to delete does not exist"
-        )
         return JsonResponse(
             {'success': False, 'error': 'Item not found'},
             status=404
         )
     except Exception as e:
-        messages.add_message(
-            request,
-            messages.ERROR,
-            "An error occured while trying to delete the item"
-        )
         return JsonResponse({'success': False, 'error': str(e)}, status=400)

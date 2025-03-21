@@ -50,14 +50,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        const newUrl = `/projects/${slug}/`;
+                        showCToast("success", "Title updated successfully");
+                        const newUrl = `/projects/${slug}/table`;
                         history.pushState(null, '', newUrl);
                     } else {
-                        console.error('Failed to update title', data);
+                        showCToast("error", "An error occurred while updating the title");
                     }
                 })
                 .catch((error) => {
-                    console.error('Error:', error);
+                    showCToast("error", "An error occurred while updating the title");
                 });
         }
     });
@@ -79,7 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const listId = formData.get('listId');
                 if (formData.get('itemId')) {
                     const itemElement = document.querySelector(`.item[data-id="${formData.get('itemId')}"]`);
-                    itemElement.textContent = data.item.title;
+                    const textNode = Array.from(itemElement.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textNode) {
+                        textNode.textContent = data.item.title;
+                    } else {
+                        itemElement.textContent = data.item.title;
+                    }
                     itemElement.setAttribute('data-title', data.item.title);
                     itemElement.setAttribute('data-description', data.item.description);
                 } else {
@@ -95,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 editItemModal.classList.remove('open');
                 editItemForm.reset();
                 deleteItemButton.style.display = 'none';
+                showCToast("success", "item added successfully");
             } else {
                 console.error(data.error);
             }
@@ -154,13 +161,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         editItemModal.classList.remove('open');
                         editItemForm.reset();
                         deleteItemButton.style.display = 'none';
+                        showCToast("success", "item deleted successfully");
                     } else {
-                        alert('Failed to delete the item.');
+                        showCToast("error", "An error occurred while deleting the item");
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('An error occurred while deleting the item.');
+                    showCToast("error", "An error occurred while deleting the item");
                 });
             }
         }
