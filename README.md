@@ -142,6 +142,26 @@ I put these colours together by using the external resource [ColorHunt](https://
 
 ### Data Models
 
+![image](https://github.com/user-attachments/assets/59bd0ce6-458d-4d48-a1e2-50b803c1a97d)
+
+As you can see from the diagram I have 3 main tables
+
+#### PROJECT
+
+This table holds all of the products for each user and also has a foreign key back to the user table.
+
+#### LIST
+
+This table holds all of the lists for each project and has a foreign key set up back to the projects table
+
+#### ITEM
+
+This table holds all of the items for each list and has a foreign key back to the lists table.
+
+#### ITEM DEPENDS ON
+
+This table was created to be able to run the Gannt charts, however this never came to fruition, but it was there to creation a relationship between an item and those other items that it depended on.
+
 ## Testing
 
 ### Manual Testing
