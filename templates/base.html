@@ -20,6 +20,7 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
         <meta name="apple-mobile-web-app-title" content="Planban">
         <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <link rel="stylesheet" type="text/css" href="{% static 'css/boards.css' %}">
         <script src="https://kit.fontawesome.com/dca04d2916.js" crossorigin="anonymous" rel="preconnect"></script>
         <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
@@ -77,7 +78,7 @@
                         <a href="https://www.facebook.com/" aria-label="Facebook" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="https://x.com/" aria-label="X" target="_blank">
+                        <a href="https://x.com/" aria-label="X (formerly Twitter)" target="_blank">
                             <i class="fab fa-x-twitter"></i>
                         </a>
                         <a href="https://www.linkedin.com/" aria-label="LinkedIn" target="_blank">
@@ -88,5 +89,53 @@
             </div>
         </footer>
         {% endif %}
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script>
+            // Function to display Toastify notifications
+            function showCToast(type, message) {
+            /* 
+                type: info, success, error, default;
+                message: message to be displayed.
+                */
+                const colorMap = {
+                    "info": '#63B3ED',
+                    "success": '#2dce89',
+                    "error": '#f5365c',
+                    "default": "#20c997"
+                };
+            
+                const color = colorMap[type] || colorMap["default"];
+            
+                // Configure and display the toast notification
+                Toastify({
+                    text: message,
+                    duration: 3000,
+                    className: type,
+                    close: true,
+                    gravity: "top",       // `top` or `bottom`
+                    position: "center",   // `left`, `center` or `right`
+                    stopOnFocus: true,    // Prevent dismissing of toast on hover
+                    style: {
+                        background: color,
+                    },
+                    escapeMarkup: false,   // Render HTML tags in the notification
+                }).showToast();
+            }
+            
+            // Extract Django messages and display them using Toastify
+            const customMessages = [
+                {% for message in messages %}
+                    {
+                        "tags": "{{ message.tags|default:'' }}",
+                        "message": "{{ message.message|default:'' }}"
+                    }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ];
+            
+            // Display each custom message using Toastify
+            customMessages.forEach(message => {
+                showCToast(message.tags, message.message);
+            });
+        </script>
     </body>
 </html>
