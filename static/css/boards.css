@@ -592,3 +592,7 @@ footer .social_media a:hover {
     max-width: 600px;
     margin: 0 auto;
 }
+
+.account_manage table {
+    width: 100%;
+}
