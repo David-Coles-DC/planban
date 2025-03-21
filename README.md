@@ -8,12 +8,6 @@
 - **Database**: PostgreSQL
 - **Authentication**: Django AllAuth
 
-## 📅 Planning
-
-Before creating the projects I set up user stories via GitHub Projects, the board itself can be found here;
-
-[https://github.com/users/David-Coles-DC/projects/8](https://github.com/users/David-Coles-DC/projects/8)
-
 ## 🚀 Deployment
 
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
@@ -126,8 +120,12 @@ Tertiary Colour - #EC8305
 
 I put these colours together by using the external resource [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3). The link is a link to the actual colours that I used.
 
-## 🗂️ Project Planning
+## 📅 Project Planning
 ### User Stories
+
+Before creating the projects I set up user stories via GitHub Projects, the board itself can be found here;
+
+[https://github.com/users/David-Coles-DC/projects/8](https://github.com/users/David-Coles-DC/projects/8)
 
 ### Wireframes
 
