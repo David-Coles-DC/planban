@@ -157,6 +157,10 @@ This table was created to be able to run the Gannt charts, however this never ca
 
 #### LIGHTHOUSE TESTS
 
+![image](https://github.com/user-attachments/assets/0a84c95a-3ea7-4137-8839-eb3976c4d33c)
+
+All pages gave the same result scores as above. This was of course after running the lighthouse several times and fixing issues that arose. The issue keeping me from getting 100% on performance id down to including external javascript sources such as FontAwesome, Toastify and Google Fonts. But I am extremely happy with the overall results.
+
 #### WCAG TESTS
 
 ### Automated Testing

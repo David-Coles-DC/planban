@@ -21,13 +21,13 @@
         <div class="list" data-id="{{ list.list.id }}">
             <div class="list_head drag_handle" data-list-id="{{ list.list.id }}">{{ list.list.title }}</div>
             <div class="list_control">
-                <span class="move_left button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                <span class="move_left button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0" aria-label="Move the list left">
                     <i class="fa-solid fa-arrow-left"></i>
                 </span>
-                <span class="move_right button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                <span class="move_right button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0" aria-label="Move the list right">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
-                <span class="edit_title button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0">
+                <span class="edit_title button trans" data-list-id="{{ list.list.id }}" role="button" tabindex="0" aria-label="Edit the list title">
                     <i class="fa-solid fa-pen"></i>
                 </span>
             </div>
@@ -37,10 +37,10 @@
                     {{ item.title }}
                     
                     <div class="item_control">
-                        <span class="move_up button trans" data-item-id="{{ item.id }}" role="button" tabindex="0">
+                        <span class="move_up button trans" data-item-id="{{ item.id }}" role="button" tabindex="0" aria-label="Move the item up">
                             <i class="fa-solid fa-arrow-up"></i>
                         </span>
-                        <span class="move_down button trans" data-item-id="{{ item.id }}" role="button" tabindex="0">
+                        <span class="move_down button trans" data-item-id="{{ item.id }}" role="button" tabindex="0" aria-label="Move the item down">
                             <i class="fa-solid fa-arrow-down"></i>
                         </span>
                     </div>
