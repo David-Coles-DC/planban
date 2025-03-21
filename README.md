@@ -163,6 +163,14 @@ All pages gave the same result scores as above. This was of course after running
 
 #### WCAG TESTS
 
+All Pages test ok for HTML validation, all except for a warning that states;
+```
+Possible misuse of aria-label.
+```
+However I feel like this is an improper warning.
+
+All pages pass the CSS validation without any issues.
+
 ### Automated Testing
 
 In the end I did not incorporate any automated testing into the project due to time limitations, however I do see the importance of automated testing as I do think that in a production project it should definitely be included.
