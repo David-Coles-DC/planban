@@ -5,9 +5,14 @@ from .models import Item, List, Project, ProjectAdmin
 
 # Register your models here.
 admin.site.register(
-    Item,
-    List,
+    Item, SummernoteModelAdmin
+)
+
+admin.site.register(
+    List, SummernoteModelAdmin
+)
+
+admin.site.register(
     Project,
-    ProjectAdmin,
-    SummernoteModelAdmin,
+    ProjectAdmin
 )
