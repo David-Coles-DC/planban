@@ -29,6 +29,8 @@ Before creating the projects I set up user stories via GitHub Projects, the boar
 
 The site is currently deployed on Heroku and can be accessed via the following URL [https://planban-c33c6bd858d7.herokuapp.com/](https://planban-c33c6bd858d7.herokuapp.com/)
 
+![Planban Screenshot](https://github.com/user-attachments/assets/9681aa90-02c1-4b2f-97ee-520de0e79c6c)
+
 ## 📦 Installation
 ### **1️⃣ Clone the Repository**
 ```sh
@@ -65,10 +67,113 @@ Planban follows **WCAG 2.1 AA guidelines**, including:
 - High **colour contrast** and resizable text.
 - Mobile-friendly and touch-accessible UI.
 
+## Features
+
+#### HOME PAGE
+The home page is purely to tell you about Planban, I've used Skrollr to add some visual animation to the page which I have disabled on mobile to stop any issues. If you are logged in then the home page will automatically direct you into the projects page, there is no other reason to see the home page if you are logged in.
+
+#### REGISTER
+You can access the register form by clicking on the 'get started' buttons, after you register it should take you straight to the projects page. The register form will be shown as a modal popup (there is a backup register page)
+
+#### LOG IN
+If you already have an account then you can login using the login links on the home page, the form will be shown as a modal popup (there is also a backup login page)
+
+#### FEATURES
+This section just shows you some thigns you can do once you sign up
+
+#### FAQs
+Just some short questions with resposning answers in drop down elements.
+
+#### CONTACT FORM
+The contact form is there for visual reference, I have not connected any email support so the form can not be sent.
+
+### Projects page
+This page will allow the user to create an unlimited amount of projects, each project can be deleted if no longer required. When you first create a project it will send you straight to the project page, but if you visit the page and have some projects already set up you can access them by just clicking on the project name.
+
+### Kanban View
+The Kanban view for the board will allow you to see your project lists set up as boards, they will be positioned in a row and you can drag and drop these lists to reposition them, there are also arrows on each board that will move the boards left and right and these can be accessed via the keyboard for people with accessibility requirements.
+
+You can edit the name of the each list just by clicking on the name of the list itself (or clicking the edit button) the title will be replaced with an input form and will update once you press enter or the input loses focus.
+
+Each list can deleted by clicking the delete button at the bottom right of the list.
+
+To create a new list just click the new list link at the far right of the lists row.
+
+Within each list you can create a new item by clicking the new item button at the bottom left of the list, the item will appear within the list you create it in, but you can drag and drop the item into another list in the position you want. You can also delete the item by clicking on it to edit it and using the delete button in the popup modal edit form.
+
+### List View
+
+You can switch between the list view and the kanban view in the top right of the screen.
+
+The list is a simplified version of the kanban board, it will just list all items in a column with a reference to what list they belong to.
+
+### Messaging
+I have incorporated Toastify to display any messages to the user, the types of messages are a split between Django messages and javascript messages, this is because the Django messages mostly only show when the page is refreshed as they are added to the session and then all shown at once, however as most of my processes do not refresh the page the messages were not showing until I manually refreshed, so to combat this I moved messages into the javascript processes instead.
+
+### Future Features
+There are some features that I didn't have time to implement that would benefit the app, these are the ability to see the items in a Gannt chart view and the ability to project colaboration.
+
+#### GANNT CHART VIEW
+This would be highly beneficial when planning projects, I had added date fields and dependancy fields into the database to be able to power the Gannt charts but I dind't have time to implement this.
+
+#### PROJECT COLLABORATION
+Adding the ability to invite other users to be able to contribute to projects would also be highly beneficial to the app.
+
+## User Experience
+### Design
+#### FONTS
+The font I chose to use was 'Poppins' which I used from Google Fonts, it's a sans-serif font that is easy to read and pleasing to look at.
+
+#### COLOURS
+The colours I went for were blue and orange which go really well together, however the actual lists themselves I chose to use shades of grey to distinguish between different elements.
+
+Primary Colour - #091057
+
+Secondary Colour - #024CAA
+
+Tertiary Colour - #EC8305
+
+I put these colours together by using the external resource [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3). The link is a link to the actual colours that I used.
+
+## Project Planning
+### User Stories
+
+### Wireframes
+
+### Data Models
+
+## Testing
+
+### Manual Testing
+
+#### LIGHTHOUSE TESTS
+
+#### WCAG TESTS
+
+### Automated Testing
+
+## AI
+
+I used AI thoughout the creation of the project, for most of the code creation and functionality as well as fixing any issues that I came across.
+
+#### CODE CREATION
+Each time I wanted a new piece of functionality I would first consult Copilot, it would produce the code for me but I would only implement the code that I saw would be beneficial to the project, sometimes it would produce code that was incorrect for the context it was to be used in, but overall it was very helpful.
+
+#### ERROR DEBUGGING
+When I had an issue with my project I would first consult Copilot, 90% of the time it could sort out the issue for me, however the other 10% of the time it had difficulty, I had to keep altering my prompts to be more specific which helped, but on the odd occassion I would have to revery to going back to Google to search for the issue.
+
+## Bugs
+Any bugs that I found were fixed as and when I found them, however this doesn't mean that the project is bug free and I'm sure there are things that could occur that would break the app, however I am unaware of any of these at the time that this readme was created.
+
 ## 📚 Resources
 
 - [ColorHunt](https://colorhunt.co/palette/091057024caaec8305dbd3d3) - For the colour palette Resources
+- [Django](https://www.djangoproject.com/) - I used Django 5.1.6
 - [Google Fonts](https://fonts.google.com/) - I used the fonts 'Poppins'
+- [Heroku](https://www.heroku.com/) - My project was deployed on Heroku
+- [Python](https://www.python.org/) - I used Python 3.13.1
 - [RealFaviconGenerator](https://realfavicongenerator.net/) - To create the favicon for the website
 - [SortableJS](https://github.com/SortableJS/Sortable) - drag and drop for reordering the lists and items
 - [Skrollr](https://github.com/Prinzhorn/skrollr) - Stand-alone parallax scrolling JavaScript library
+- [Toastify](https://apvarun.github.io/toastify-js/) - Used to show messages to the user
+- [VSCode](https://code.visualstudio.com/) - I used VSCode as my development environment

@@ -461,6 +461,7 @@ input.list-title-input {
     gap: 10px;
     height: 100%;
     margin: 0 10px;
+    overflow: auto;
 }
 
 .item_control {
