@@ -104,7 +104,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-showCToast("error", "error");
-showCToast("success", "success");
-showCToast("info", "warning");

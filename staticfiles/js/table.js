@@ -58,6 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                item.click();
+            }
+        });
         item.addEventListener('click', function() {
             const itemIdValue = this.getAttribute('data-id');
             const itemTitleValue = this.getAttribute('data-title');

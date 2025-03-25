@@ -228,10 +228,46 @@ This table was created to be able to run the Gannt charts, however this never ca
 |Kanban View|Header - Back button|Click|Redirects back to the projects page|✅|
 |Kanban View|Header - Project Title|Click|Allows you to edit the project name|✅|
 |Kanban View|Header - Project Title|Edit|After edit pressing enter or losing focus saves the new title|✅|
+|Kanban View|Header - Project Title|Edit|If the title is blank notify the user|✅|
+|Kanban View|Header - Project Title|Edit|If the title alredy exists notify the user|✅|
+|Kanban View|Lists|Drag & Drop|The lists will reorder after dropping|✅|
+|Kanban View|Lists - Add List Button|Click|The new list input will appear|✅|
+|Kanban View|Lists - New List Form|Blank List Name|Validation notifies that the list name is required|✅|
+|Kanban View|Lists - New List Form - Cancel|Click|Hides the new list form|✅|
+|Kanban View|Lists - New List Form - Add List|Click|Saves the new list and adds it to the DOM|✅|
+|Kanban View|Lists - List Title|Click|Allows you to edit the list title|✅|
+|Kanban View|Lists - Move Left Button|Click|Moves the list to the left|✅|
+|Kanban View|Lists - Move Right Button|Click|Moves the list to the right|✅|
+|Kanban View|Lists - Edit Button|Click|Allows you to edit the list title|✅|
+|Kanban View|Lists - List Title|Edit|After edit pressing enter or losing focus saves the new list title|✅|
+|Kanban View|Lists - Delete Button|Click|An alert appers to confirm if the user wants to delete the list|✅|
+|Kanban View|Lists - Delete Confirm - OK|Click|The list is deleted and removed from the DOM|✅|
+|Kanban View|Lists - Delete Confirm - Cancel|Click|The list is not deleted|✅|
+|Kanban View|Lists - Add Item Button|Click|A modal form is shown to add a new item|✅|
+|Kanban View|Lists - Add Item Form|Blank Item Name|Validation notifies that the item name is required|✅|
+|Kanban View|Lists - Add Item Form - Add Item Button|Click|The item is created and added to the relevant list|✅|
+|Kanban View|Items|Drag & Drop|The items will reorder after dropping, even between lists|✅|
+|Kanban View|Items - Down Arrow Button|Click|The items will be moved down in the order|✅|
+|Kanban View|Items - Up Arrow Button|Click|The items will be moved up in the order|✅|
+|Kanban View|Items - Item Container|Click|The Edit Item modal will be displayed|✅|
+|Kanban View|Items - Item Container - Focus|Enter Key Pressed|The Edit Item modal will be displayed|✅|
+|Kanban View|Items - Edit Item Form - Delete Item|Click|An alert appers to confirm if the user wants to delete the item|✅|
+|Kanban View|Items - Delete Confirmation - OK|Click|The item is deleted and removed from the DOM|✅|
+|Kanban View|Items - Delete Confirmation - Cancel|Click|The item is not deleted|✅|
+|Kanban View|Items - Edit Item Form|Blank List Name|Validation notifies that the list item is required|✅|
+|Kanban View|Items - Edit Item Form - Edit Item Button|Click|The item is saved and the DOM updated|✅|
 |Table View|Header - Kanban View switch|Click|Redirects you to the kanban view|✅|
 |Table View|Header - Back button|Click|Redirects back to the projects page|✅|
 |Table View|Secure Access|Navigate to without being logged in|Redirects back to the login page|✅|
-|Table View|Site Logo|Click|Redirects back to the projects page|✅|
+|Table View|Header - Project Title|Edit|After edit pressing enter or losing focus saves the new title|✅|
+|Table View|Header - Project Title|Edit|If the title is blank notify the user|✅|
+|Table View|Header - Project Title|Edit|If the title alredy exists notify the user|✅|
+|Table View|Items - Item Container|Click|The Edit Item modal will be displayed|✅|
+|Table View|Items - Edit Item Form - Delete Item|Click|An alert appers to confirm if the user wants to delete the item|✅|
+|Table View|Items - Delete Confirmation - OK|Click|The item is deleted and removed from the DOM|✅|
+|Table View|Items - Delete Confirmation - Cancel|Click|The item is not deleted|✅|
+|Table View|Items - Edit Item Form|Blank List Name|Validation notifies that the list item is required|✅|
+|Table View|Items - Edit Item Form - Edit Item Button|Click|The item is saved and the DOM updated|✅|
 
 #### LIGHTHOUSE TESTS
 

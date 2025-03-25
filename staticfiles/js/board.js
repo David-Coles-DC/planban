@@ -510,6 +510,11 @@ document.addEventListener('DOMContentLoaded', function () {
         item.addEventListener('click', function() {
             openEditItemModal(this);
         });
+        item.addEventListener('keydown', function() {
+            if (event.key === 'Enter') {
+                openEditItemModal(this);
+            }
+        });
     });
 
     const addItemButtons = document.querySelectorAll('.add_item');

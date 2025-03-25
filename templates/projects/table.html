@@ -20,7 +20,7 @@
         {% for list in lists_with_items %}
         <input type="hidden" class="list_id" value="{{ list.list.id }}">
             {% for item in list.items %}
-            <div class="item" data-id="{{ item.id }}" data-list-id="{{ list.list.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}">
+            <div class="item" data-id="{{ item.id }}" data-list-id="{{ list.list.id }}" data-title="{{ item.title }}" data-description="{{ item.description }}" tabindex="0">
                 {{ item.title }}
                 <span>{{ list.list.title }}</span>
             </div>
