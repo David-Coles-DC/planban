@@ -324,7 +324,7 @@
                     <span class="logo" aria-hidden></span>
                     Sign up
                 </h2>
-                <form method="post" action="{% url 'account_signup' %}">
+                <form method="post" id="signupForm" action="{% url 'account_signup' %}" onsubmit="return validateSignupForm()">
                     {% csrf_token %}
                     <div>
                         <div>
@@ -507,6 +507,16 @@
                 event.preventDefault();
                 alert("Your message has been sent");
                 frmContact.reset();
+            }
+
+            function validateSignupForm() {
+                var password1 = document.getElementById('id_password1').value;
+                var password2 = document.getElementById('id_password2').value;
+                if (password1 !== password2) {
+                    alert('Passwords do not match');
+                    return false;
+                }
+                return true;
             }
         </script>
     </body>

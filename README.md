@@ -96,7 +96,7 @@ The list is a simplified version of the kanban board, it will just list all item
 I have incorporated Toastify to display any messages to the user, the types of messages are a split between Django messages and javascript messages, this is because the Django messages mostly only show when the page is refreshed as they are added to the session and then all shown at once, however as most of my processes do not refresh the page the messages were not showing until I manually refreshed, so to combat this I moved messages into the javascript processes instead.
 
 ### Future Features
-There are some features that I didn't have time to implement that would benefit the app, these are the ability to see the items in a Gannt chart view and the ability to project colaboration.
+There are some features that I didn't have time to implement that would benefit the app, these are the ability to see the items in a Gannt chart view and the ability to project colaboration. I also have some left over functionality that would benefit from being rewritten, namely I still have some alerts set up that are set as browser alerts that could be turned into seamless notifications and handled oon the page itself.
 
 #### GANNT CHART VIEW
 This would be highly beneficial when planning projects, I had added date fields and dependancy fields into the database to be able to power the Gannt charts but I dind't have time to implement this.
@@ -180,6 +180,26 @@ This table was created to be able to run the Gannt charts, however this never ca
 |Homepage|Contact Section - Form|Blank email on submit|Validation notifies that the email is required|✅|
 |Homepage|Contact Section - Form|Invalid email on submit|Validation notifies that the email is malformed|✅|
 |Homepage|Contact Section - Form|Blank message on submit|Validation notifies that the message is required|✅|
+|Homepage|Contact Section - Form|Submit|User notified that the form has been sent, the form is reset|✅|
+|Homepage|Footer Section - Social - Facebook|Click|Opens Facebook in a new tab|✅|
+|Homepage|Footer Section - Social - X|Click|Opens X in a new tab|✅|
+|Homepage|Footer Section - Social - LinkedIn|Click|Opens LinkedIn in a new tab|✅|
+|Homepage|Signup Modal - Form|Blank username on submit|Validation notifies that the username is required|✅|
+|Homepage|Signup Modal - Form|Blank email on submit|Allowed|✅|
+|Homepage|Signup Modal - Form|Invalid email on submit|Validation notifies that the email is malformed|✅|
+|Homepage|Signup Modal - Form|Blank password on submit|Validation notifies that the password is required|✅|
+|Homepage|Signup Modal - Form|Blank password confirmation on submit|Validation notifies that the password confirmation is required|✅|
+|Homepage|Signup Modal - Form|Passwords do not match on submit|Validation notifies that the passwords do not match|✅|
+|Homepage|Signup Modal - Form|Passwords are not secure enough|AllAuth handles the validation here so redirects them to a signup page with the error|✅|
+|Homepage|Signup Modal - Form|Successful signup|Account is created and user forwarded to the Projects page|✅|
+|Signup page|Form|Blank username on submit|Validation notifies that the username is required|✅|
+|Signup page|Form|Blank email on submit|Allowed|✅|
+|Signup page|Form|Invalid email on submit|Validation notifies that the email is malformed|✅|
+|Signup page|Form|Blank password on submit|Validation notifies that the password is required|✅|
+|Signup page|Form|Blank password confirmation on submit|Validation notifies that the password confirmation is required|✅|
+|Signup page|Form|Passwords do not match on submit|Validation notifies that the passwords do not match|✅|
+|Signup page|Form|Passwords are not secure enough|Validation notifies that the password is not secure enough|✅|
+|Signup page|Form|Successful signup|Account is created and user forwarded to the Projects page|✅|
 |Projects Page|Site Logo|Click|Redirects to home page from all pages|✅|
 |Kanban View|Site Logo|Click|Redirects to home page from all pages|✅|
 |Table View|Site Logo|Click|Redirects to home page from all pages|✅|
