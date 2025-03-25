@@ -139,6 +139,8 @@ For the mobile view the above theory would also take place, it would fit into th
 
 I managed to create the design that I intended from the wireframes, however I did also create a home page for people to find out about Planban and I also added a list view which didn't originally exist on the wireframes.
 
+In the wireframes it doens't include any movement buttons, originally I though drag and drop would be all that was required, but then when you start to think about accessibility I realised that I would also need some buttons that can be accessed if you are using a keyboard only, so I had to incorporate buttons to reorganise lists and items as well as making things like the item container tabbable so that you can get to it to be able to press enter to open the edit modal.
+
 ### Data Models
 
 ![image](https://github.com/user-attachments/assets/59bd0ce6-458d-4d48-a1e2-50b803c1a97d)
