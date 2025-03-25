@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', function () {
             submitButton.textContent = 'Edit Item';
             deleteItemButton.style.display = 'block';
             editItemModal.classList.add('open');
+            setTimeout(() => {
+                itemTitle.focus();
+            }, 100);
         });
     });
 

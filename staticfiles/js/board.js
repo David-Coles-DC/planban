@@ -504,7 +504,9 @@ document.addEventListener('DOMContentLoaded', function () {
         submitButton.textContent = 'Edit Item';
         deleteItemButton.style.display = 'block';
         editItemModal.classList.add('open');
-        itemTitle.focus();
+        setTimeout(() => {
+            itemTitle.focus();
+        }, 100);
     }
 
     document.querySelectorAll('.item').forEach(item => {
