@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     const itemsContainer = document.querySelector('.items_table');
-    const titleElement = document.getElementById('project-title');
-    const projectId = titleElement.dataset.projectId;
     const editItemModal = document.getElementById('editItemModal');
     const editItemForm = document.getElementById('editItemForm');
     const modalTitle = document.getElementById('modalTitle');
@@ -12,56 +10,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitButton = editItemForm.querySelector('button[type="submit"]');
     const deleteItemButton = document.getElementById('deleteItemButton');
     const firstListId = document.querySelector('.list_id').value;
-
-    titleElement.addEventListener('click', function () {
-        const currentTitle = titleElement.innerText;
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = currentTitle;
-        input.id = 'title-input';
-        titleElement.replaceWith(input);
-        input.focus();
-
-        input.addEventListener('blur', saveTitle);
-        input.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                saveTitle();
-            }
-        });
-
-        function saveTitle() {
-            const newTitle = input.value;
-            const slug = input.value
-                .toLowerCase()
-                .replace(/ /g, '-')
-                .replace(/[^\w-]+/g, '');
-            titleElement.innerText = newTitle;
-            input.replaceWith(titleElement);
-
-            // Send the new title to the server
-            fetch(`/projects/update-project-title/${projectId}/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken'),
-                },
-                body: JSON.stringify({ title: newTitle, slug: slug, projectId: projectId }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.success) {
-                        showCToast("success", "Title updated successfully");
-                        const newUrl = `/projects/${slug}/table`;
-                        history.pushState(null, '', newUrl);
-                    } else {
-                        showCToast("error", "An error occurred while updating the title");
-                    }
-                })
-                .catch((error) => {
-                    showCToast("error", "An error occurred while updating the title");
-                });
-        }
-    });
 
     editItemForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -140,50 +88,5 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteItemButton.style.display = 'none';
             editItemModal.classList.add('open');
         });
-    });
-
-    deleteItemButton.addEventListener('click', function() {
-        const itemId = itemIdInput.value;
-        if (itemId) {
-            const confirmation = confirm("Are you sure you want to delete this item?");
-            if (confirmation) {
-                fetch(`/projects/delete-item/${itemId}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken')
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        const itemElement = document.querySelector(`.item[data-id="${itemId}"]`);
-                        itemElement.remove();
-                        editItemModal.classList.remove('open');
-                        editItemForm.reset();
-                        deleteItemButton.style.display = 'none';
-                        showCToast("success", "item deleted successfully");
-                    } else {
-                        showCToast("error", "An error occurred while deleting the item");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showCToast("error", "An error occurred while deleting the item");
-                });
-            }
-        }
-    });
-
-    const closeModalButtons = document.querySelectorAll('.modal .close');
-    closeModalButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            this.closest('.modal').classList.remove('open');
-        });
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target.classList.contains('modal')) {
-            event.target.classList.remove('open');
-        }
     });
 });

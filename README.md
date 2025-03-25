@@ -192,6 +192,10 @@ This table was created to be able to run the Gannt charts, however this never ca
 |Homepage|Signup Modal - Form|Passwords do not match on submit|Validation notifies that the passwords do not match|✅|
 |Homepage|Signup Modal - Form|Passwords are not secure enough|AllAuth handles the validation here so redirects them to a signup page with the error|✅|
 |Homepage|Signup Modal - Form|Successful signup|Account is created and user forwarded to the Projects page|✅|
+|Homepage|Login Modal - Form|Blank username/email on submit|Validation notifies that the username/email is required|✅|
+|Homepage|Login Modal - Form|Blank password on submit|Validation notifies that the password is required|✅|
+|Homepage|Login Modal - Form|email or password incorrect|AllAuth handles the validation here so redirects them to a login page with the error|✅|
+|Homepage|Login Modal - Form|Successful login|User logged in and forwarded to the Projects page|✅|
 |Signup page|Form|Blank username on submit|Validation notifies that the username is required|✅|
 |Signup page|Form|Blank email on submit|Allowed|✅|
 |Signup page|Form|Invalid email on submit|Validation notifies that the email is malformed|✅|
@@ -200,9 +204,34 @@ This table was created to be able to run the Gannt charts, however this never ca
 |Signup page|Form|Passwords do not match on submit|Validation notifies that the passwords do not match|✅|
 |Signup page|Form|Passwords are not secure enough|Validation notifies that the password is not secure enough|✅|
 |Signup page|Form|Successful signup|Account is created and user forwarded to the Projects page|✅|
-|Projects Page|Site Logo|Click|Redirects to home page from all pages|✅|
-|Kanban View|Site Logo|Click|Redirects to home page from all pages|✅|
-|Table View|Site Logo|Click|Redirects to home page from all pages|✅|
+|Login page|Login Modal - Form|Blank username/email on submit|Validation notifies that the username/email is required|✅|
+|Login page|Login Modal - Form|Blank password on submit|Validation notifies that the password is required|✅|
+|Login page|Login Modal - Form|email or password incorrect|Validation notifies them that the email or password is incorrect|✅|
+|Login page|Login Modal - Form|Successful login|User logged in and forwarded to the Projects page|✅|
+|Account area|Secure Access|Navigate to without being logged in|Redirects back to the login page|✅|
+|Account area|Site Logo|Click|Redirects back to the projects page|✅|
+|Account area|Header - Account Icon|Visual|Shows initials of logged in person|✅|
+|Account area|Header - Account Icon|Click|Drops down menu|✅|
+|Account area|Header - Account Menu|Visuals|Shows username and email (if entered) of current user|✅|
+|Account area|Header - Account Menu - Manage Your Password|Click|Redirected to manage your password (AllAuth Page)|✅|
+|Account area|Header - Account Menu - Manage Your Email Address|Click|Redirected to manage your email address (AllAuth Page)|✅|
+|Account area|Header - Account Menu - Projects|Click|Redirected to projects page|✅|
+|Account area|Header - Account Menu - Logout|Click|Successfully logged out and redirected to home page|✅|
+|Projects Page|Header - New Project button|Click|Show new project modal form|✅|
+|Projects Page|Main - New Project button|Click|Show new project modal form|✅|
+|Projects Page|New Project - Form|Modal click outside|Closes the modal|✅|
+|Projects Page|New Project - Form - Close Button|Click|Closes the modal|✅|
+|Projects Page|New Project - Form|Blank Title|Validation notifies that the title is required|✅|
+|Projects Page|New Project - Form|Title|As the user types the slug is automatically created|✅|
+|Projects Page|New Project - Form|Submit|The project is created and redirected to the Kanban view|✅|
+|Kanban View|Header - Table View switch|Click|Redirects you to the table view|✅|
+|Kanban View|Header - Back button|Click|Redirects back to the projects page|✅|
+|Kanban View|Header - Project Title|Click|Allows you to edit the project name|✅|
+|Kanban View|Header - Project Title|Edit|After edit pressing enter or losing focus saves the new title|✅|
+|Table View|Header - Kanban View switch|Click|Redirects you to the kanban view|✅|
+|Table View|Header - Back button|Click|Redirects back to the projects page|✅|
+|Table View|Secure Access|Navigate to without being logged in|Redirects back to the login page|✅|
+|Table View|Site Logo|Click|Redirects back to the projects page|✅|
 
 #### LIGHTHOUSE TESTS
 
