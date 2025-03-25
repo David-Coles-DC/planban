@@ -167,7 +167,19 @@ This table was created to be able to run the Gannt charts, however this never ca
 
 |Page|Feature|Action|Effect|Passed|
 |---|---|---|---|---|
-|Homepage|Site Logo|Click|Redirects to home page from all pages|✅|
+|Homepage|CTA Button - Get Started|Click|Opens sign up modal|✅|
+|Homepage|CTA Button - Contact Us|Click|Scrolls to contact us section|✅|
+|Homepage|Navigation - Home|Click|Scrolls to top of page|✅|
+|Homepage|Navigation - Features|Click|Scrolls to features section|✅|
+|Homepage|Navigation - FAQs|Click|Scrolls to faqs section|✅|
+|Homepage|Navigation - Contact Us|Click|Scrolls to contact us section|✅|
+|Homepage|Navigation - Login|Click|Opens login modal|✅|
+|Homepage|Navigation - Get Started|Click|Opens sign up modal|✅|
+|Homepage|FAQ Section - Questions|Click|Toggles the answer to show/hide|✅|
+|Homepage|Contact Section - Form|Blank name on submit|Validation notifies that the name is required|✅|
+|Homepage|Contact Section - Form|Blank email on submit|Validation notifies that the email is required|✅|
+|Homepage|Contact Section - Form|Invalid email on submit|Validation notifies that the email is malformed|✅|
+|Homepage|Contact Section - Form|Blank message on submit|Validation notifies that the message is required|✅|
 |Projects Page|Site Logo|Click|Redirects to home page from all pages|✅|
 |Kanban View|Site Logo|Click|Redirects to home page from all pages|✅|
 |Table View|Site Logo|Click|Redirects to home page from all pages|✅|
@@ -176,7 +188,7 @@ This table was created to be able to run the Gannt charts, however this never ca
 
 ![image](https://github.com/user-attachments/assets/0a84c95a-3ea7-4137-8839-eb3976c4d33c)
 
-All pages gave the same result scores as above. This was of course after running the lighthouse several times and fixing issues that arose. The issue keeping me from getting 100% on performance id down to including external javascript sources such as FontAwesome, Toastify and Google Fonts. But I am extremely happy with the overall results.
+All pages gave the same result scores as above. This was of course after running the lighthouse several times and fixing issues that arose. The issue keeping me from getting 100% on performance is down to including external javascript sources such as FontAwesome, Toastify and Google Fonts. But I am extremely happy with the overall results.
 
 #### WCAG TESTS
 
