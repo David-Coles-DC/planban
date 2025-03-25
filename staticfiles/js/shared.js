@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const titleElement = document.getElementById('project-title');
     const projectId = titleElement.dataset.projectId;
+    const itemIdInput = document.getElementById('itemId');
 
     titleElement.addEventListener('click', function () {
         const currentTitle = titleElement.innerText;
